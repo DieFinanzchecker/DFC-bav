@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "ask": [
+      "Read(~/Downloads/**)",
+      "Edit(~/Downloads/**)",
+      "Write(~/Downloads/**)",
+      "Read(~/Desktop/**)",
+      "Edit(~/Desktop/**)",
+      "Write(~/Desktop/**)",
+      "Read(~/Documents/**)",
+      "Edit(~/Documents/**)",
+      "Write(~/Documents/**)",
+      "Read(~/Pictures/**)",
+      "Edit(~/Pictures/**)",
+      "Write(~/Pictures/**)",
+      "Read(~/Movies/**)",
+      "Edit(~/Movies/**)",
+      "Write(~/Movies/**)",
+      "Read(~/Music/**)",
+      "Edit(~/Music/**)",
+      "Write(~/Music/**)",
+      "Read(~/Library/**)",
+      "Edit(~/Library/**)",
+      "Write(~/Library/**)"
+    ]
+  }
+}
