@@ -1,0 +1,135 @@
+---
+import Icon from './Icon.astro';
+---
+
+<section id="kontakt" class="section-bg px-4 py-16 md:py-24 scroll-mt-24">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="pill-label">Kontakt</span>
+      <h2 class="font-display text-fluid-h2 text-foreground mb-4">Lassen Sie uns sprechen</h2>
+      <p class="font-body text-fluid-body text-muted-foreground">
+        Schildern Sie uns kurz Ihre Situation — wir melden uns zeitnah für ein kostenloses Erstgespräch.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-[1.4fr_1fr] gap-8 items-start">
+
+      <!-- Kontaktformular: reine Frontend-Validierung, kein echter Versand-Handler -->
+      <div class="scroll-fade-in bg-background rounded-2xl border border-border p-6 md:p-8 shadow-sm">
+        <!-- TODO_DFC: Versand-Backend (Make.com-Webhook oder E-Mail) noch offen, siehe Projektplan -->
+        <form class="grid sm:grid-cols-2 gap-5">
+          <div class="sm:col-span-1">
+            <label for="firmenname" class="font-body text-sm font-semibold text-foreground mb-1.5 block">Firmenname *</label>
+            <input
+              id="firmenname"
+              name="firmenname"
+              type="text"
+              required
+              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
+            />
+          </div>
+
+          <div class="sm:col-span-1">
+            <label for="ansprechpartner" class="font-body text-sm font-semibold text-foreground mb-1.5 block">Ansprechpartner *</label>
+            <input
+              id="ansprechpartner"
+              name="ansprechpartner"
+              type="text"
+              required
+              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
+            />
+          </div>
+
+          <div class="sm:col-span-1">
+            <label for="mitarbeiterzahl" class="font-body text-sm font-semibold text-foreground mb-1.5 block">Mitarbeiterzahl *</label>
+            <select
+              id="mitarbeiterzahl"
+              name="mitarbeiterzahl"
+              required
+              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
+            >
+              <option value="" selected disabled>Bitte wählen</option>
+              <option value="1-9">1–9</option>
+              <option value="10-49">10–49</option>
+              <option value="50-249">50–249</option>
+              <option value="250+">250+</option>
+            </select>
+          </div>
+
+          <div class="sm:col-span-1">
+            <label for="email" class="font-body text-sm font-semibold text-foreground mb-1.5 block">E-Mail *</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
+            />
+          </div>
+
+          <div class="sm:col-span-1">
+            <label for="telefon" class="font-body text-sm font-semibold text-foreground mb-1.5 block">Telefon (optional)</label>
+            <input
+              id="telefon"
+              name="telefon"
+              type="tel"
+              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
+            />
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="nachricht" class="font-body text-sm font-semibold text-foreground mb-1.5 block">Nachricht (optional)</label>
+            <textarea
+              id="nachricht"
+              name="nachricht"
+              rows="4"
+              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors resize-y"
+            ></textarea>
+          </div>
+
+          <div class="sm:col-span-2 flex items-start gap-2.5">
+            <input
+              id="dsgvo"
+              name="dsgvo"
+              type="checkbox"
+              required
+              class="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/40 shrink-0"
+            />
+            <label for="dsgvo" class="font-body text-xs text-muted-foreground leading-relaxed">
+              Ich habe die <a href="https://diefinanzchecker.de/datenschutz" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-foreground">Datenschutzerklärung</a> zur Kenntnis genommen und bin mit der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage einverstanden. *
+            </label>
+          </div>
+
+          <div class="sm:col-span-2">
+            <button
+              type="submit"
+              class="cta-hover shimmer inline-flex items-center justify-center gap-2 rounded-full font-body font-semibold text-base px-7 py-3.5 brand-gradient text-white shadow-lg shadow-primary/25 transition-all duration-300 w-full sm:w-auto"
+            >
+              Anfrage absenden
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Gleichwertige Alternative: direkt einen Termin buchen -->
+      <div class="scroll-fade-in bg-[hsl(var(--dark-bg))] text-white rounded-2xl p-6 md:p-8 flex flex-col gap-4 h-full">
+        <div class="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-white/10 text-white">
+          <Icon name="calendar" class="h-5 w-5" />
+        </div>
+        <h3 class="font-display text-xl">Lieber direkt einen Termin?</h3>
+        <p class="font-body text-sm text-white/70 leading-relaxed">
+          Buchen Sie sich ganz ohne Formular direkt einen kostenlosen Kennenlerntermin in unserem Kalender — Sie wählen den Zeitpunkt, der für Sie passt.
+        </p>
+        <a
+          href="https://calendly.com/diefinanzchecker/kennenlerntermin"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cta-hover mt-auto inline-flex items-center justify-center gap-2 rounded-full font-body font-semibold text-sm px-6 py-3 bg-white text-[hsl(var(--dark-bg))] hover:bg-white/90 transition-all duration-300"
+        >
+          Termin per Calendly buchen
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>

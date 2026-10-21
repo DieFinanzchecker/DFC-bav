@@ -1,0 +1,486 @@
+@import "tailwindcss";
+
+/* ===========================
+   Schriften: Inter und Anton beide lokal (DSGVO-konform, siehe @font-face unten).
+   Keine externen Google-Fonts-Requests mehr.
+   =========================== */
+
+/* Anker-Scroll kompensiert Sticky-Nav (~72px) */
+html {
+  scroll-padding-top: 88px;
+}
+
+/* ===========================
+   Lokal gehostete Schriftarten
+   (DSGVO-konform, kein Google Fonts)
+   =========================== */
+
+/* Body-Font: Inter (Variable) */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter/inter-latin-wght-normal.woff2") format("woff2");
+}
+
+/* Display-Font: Anton (Regular 400, Latin-Subset) */
+@font-face {
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/anton/anton-latin-400-normal.woff2") format("woff2");
+}
+
+/* ===========================
+   CSS Custom Properties
+   (Design-Tokens DFC — DieFinanzchecker GmbH)
+   =========================== */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 120 6% 6%;
+  --card: 0 0% 95%;
+  --card-foreground: 120 6% 6%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 120 6% 6%;
+  --primary: 232 100% 61%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 95%;
+  --secondary-foreground: 120 6% 6%;
+  --muted: 0 0% 95%;
+  --muted-foreground: 0 0% 40%;
+  --accent: 20 89% 55%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 72% 51%;
+  --border: 0 0% 88%;
+  --input: 0 0% 88%;
+  --ring: 232 100% 61%;
+  --radius: 0.75rem;
+  --surface: 0 0% 95%;
+  --surface-2: 0 0% 92%;
+  --gold: 36 55% 58%;
+  --gold-dark: 36 55% 32%;
+  --teal: 232 100% 61%;
+  --warn: 20 89% 55%;
+  --dark-bg: 120 6% 6%;
+
+  /* DFC Brand Colors (direkter Zugriff ohne HSL-Konvertierung) */
+  --color-dark: #0F110C;
+  --color-accent-blue: #3D50FF;
+  --color-accent-orange: #F26327;
+  --color-accent-bright: #3DADFF;
+  --color-card-light: #F3F3F3;
+  --color-gray: #9B9B9B;
+}
+
+/* ===========================
+   Tailwind v4 Theme
+   =========================== */
+@theme inline {
+  --font-display: "Anton", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-border: hsl(var(--border));
+  --color-card: hsl(var(--card));
+  --color-gold: hsl(var(--gold));
+  --color-gold-dark: hsl(var(--gold-dark));
+  --color-teal: hsl(var(--teal));
+  --color-warn: hsl(var(--warn));
+  --color-surface: hsl(var(--surface));
+  --color-dark-bg: hsl(var(--dark-bg));
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+
+  --animate-bounce-slow: bounce-slow 2s ease-in-out infinite;
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+/* ===========================
+   Base Styles
+   =========================== */
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Anton", sans-serif;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* ===========================
+   Utility Classes
+   (aus Lovable übernommen)
+   =========================== */
+
+/* Noise texture overlay */
+.noise-bg {
+  position: relative;
+}
+.noise-bg::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.03;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Gold separator */
+.gold-separator {
+  border-top: 1px solid hsl(var(--gold) / 0.3);
+}
+
+/* Shimmer animation for CTA buttons.
+   pointer-events:none damit axe/Lighthouse das Pseudo-Element
+   nicht als Contrast-Blocker zählt (sonst A11y-Score 95 statt 100). */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transition: left 0.5s;
+  pointer-events: none;
+}
+.shimmer:hover::after {
+  left: 100%;
+}
+
+/* A11y-Fix (WCAG 2.1 AA): Hero-BG-Image in eigenes absolut-positioniertes
+   Wrapper-Div verschieben (siehe .hero-bg-image Nutzung in Hero-Sektionen).
+   Dadurch bleibt die Section selbst eine rein solide dunkle Fläche und
+   axe/Lighthouse können den Kontrast der Hero-Texte gegen .section-dark
+   deterministisch messen. A11y 95 → 100 auf PKV/BU/Altersvorsorge/
+   Haftpflicht. */
+.hero-bg-image {
+  position: absolute;
+  inset: 0;
+  background-color: hsl(var(--dark-bg));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Delta-Chip: dezenter Pulse, lenkt Blick auf die 120 €/Monat-Ersparnis
+   ohne aufdringlich zu sein. Respektiert reduced-motion. */
+.delta-chip {
+  animation: delta-pulse 2.8s ease-in-out infinite;
+}
+@keyframes delta-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 2px 8px -2px hsl(var(--gold) / 0.3); }
+  50%      { transform: scale(1.04); box-shadow: 0 6px 16px -2px hsl(var(--gold) / 0.5); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .delta-chip { animation: none; }
+}
+
+/* PKV Reha-Flow: dezente Pulse-Animation auf den Pfeilen zwischen den 3 Schritten,
+   signalisiert Fluss ohne aufdringlich zu sein. Respektiert reduced-motion. */
+.flow-arrow {
+  animation: flow-pulse 2.4s ease-in-out infinite;
+}
+.flow-arrow:nth-of-type(2) { animation-delay: 0.6s; }
+@keyframes flow-pulse {
+  0%, 100% { opacity: 0.45; transform: translateX(0); }
+  50%      { opacity: 1;    transform: translateX(3px); }
+}
+@media (max-width: 767px) {
+  @keyframes flow-pulse {
+    0%, 100% { opacity: 0.45; transform: translateY(0); }
+    50%      { opacity: 1;    transform: translateY(3px); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flow-arrow { animation: none; opacity: 0.8; }
+}
+
+
+/* Enhanced hover for cards */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px -8px hsl(var(--primary) / 0.12);
+  border-color: hsl(var(--primary) / 0.3);
+}
+.card-hover:active {
+  transform: translateY(0);
+  border-color: hsl(var(--primary) / 0.4);
+}
+
+/* CTA button enhanced hover */
+.cta-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cta-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px hsl(var(--primary) / 0.35);
+}
+.cta-hover:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px -2px hsl(var(--primary) / 0.25);
+}
+
+/* Scroll animations */
+.scroll-fade-in {
+  opacity: 0.001; /* fast unsichtbar — Animation bleibt erkennbar wenn Observer triggert */
+  transform: translateY(8px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.scroll-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Defensive: Reduce-Motion-User sehen Inhalt sofort, ohne Animation */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-fade-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Section backgrounds */
+.section-surface {
+  background-color: hsl(var(--surface));
+}
+.section-bg {
+  background-color: hsl(var(--background));
+}
+.section-dark {
+  background-color: hsl(var(--dark-bg));
+  color: white;
+}
+
+/* Fluid Typography */
+.text-fluid-hero {
+  font-size: clamp(2rem, 1rem + 4vw, 4rem);
+  line-height: 1.1;
+}
+.text-fluid-h2 {
+  font-size: clamp(1.75rem, 1rem + 3vw, 3rem);
+  line-height: 1.2;
+}
+.text-fluid-body {
+  font-size: clamp(0.875rem, 0.8rem + 0.5vw, 1.125rem);
+  line-height: 1.7;
+}
+
+/* Smooth FAQ accordion (CSS-only) */
+details.faq-item > summary {
+  cursor: pointer;
+  list-style: none;
+}
+details.faq-item > summary::-webkit-details-marker {
+  display: none;
+}
+details.faq-item > .faq-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-out;
+}
+details.faq-item[open] > .faq-content {
+  grid-template-rows: 1fr;
+}
+details.faq-item > .faq-content > div {
+  overflow: hidden;
+}
+
+/* DFC Brand Gradient (matches diefinanzchecker.de): #3D50FF → #3DADFF */
+.brand-gradient {
+  background-image: linear-gradient(to right, #3D50FF, #3DADFF);
+}
+.brand-gradient-text {
+  /* Helle Gradient-Variante für Text auf dunklem Bg — beide Endpunkte WCAG AAA-large auf #0F110C */
+  background-image: linear-gradient(to right, #7B8BFF, #3DADFF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.brand-gradient-text-on-light {
+  /* Tiefer-Blau-Variante für Text auf weißem/hellem Bg — #3D50FF auf #FFF = WCAG AA (~5.7) */
+  background-image: linear-gradient(to right, #3D50FF, #3DADFF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Pill label (used on all service pages) */
+.pill-label {
+  display: inline-block;
+  border-radius: 9999px;
+  background-color: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 1.5rem;
+}
+
+/* Pill auf dunklen Sections — DFC Hell-Akzent für AAA Kontrast */
+.section-dark .pill-label,
+.section-b2b-dark .pill-label,
+section.relative .pill-label {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #3DADFF;
+}
+
+/* ===========================
+   B2B-Utilities (DFC-bAV)
+   Sachlicherer Look für die Arbeitgeber-Zielgruppe, ergänzt die
+   bestehenden Tokens/Farben — nichts oben wird verändert.
+   =========================== */
+
+/* Dezente dunkle Sektion mit CSS-only Dot-Grid-Hintergrund (kein Bild) */
+.section-b2b-dark {
+  position: relative;
+  background-color: hsl(var(--dark-bg));
+  color: white;
+  overflow: hidden;
+}
+.section-b2b-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 0%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+.section-b2b-dark > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Vorteilsblöcke (Icon + Titel + Text) — heller Rahmen, dezenter Schatten,
+   kombinierbar mit .card-hover */
+.benefit-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: 0 2px 14px -6px rgba(0, 0, 0, 0.08);
+}
+.benefit-card .benefit-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background-color: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+}
+.benefit-card h3 {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  color: hsl(var(--foreground));
+}
+.benefit-card p {
+  font-family: "Inter", sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Horizontale Kennzahlen-Reihe (2–4 Spalten, responsive) */
+.stat-panel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem 1.5rem;
+}
+.stat-panel[data-cols="3"] {
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 640px) {
+  .stat-panel[data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
+  .stat-panel[data-cols="4"] { grid-template-columns: repeat(4, 1fr); }
+}
+.stat-panel .stat-value {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(1.75rem, 1rem + 2vw, 2.5rem);
+  line-height: 1;
+}
+.stat-panel .stat-label {
+  font-family: "Inter", sans-serif;
+  font-size: 0.8125rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.5rem;
+}
+.section-dark .stat-panel .stat-label,
+.section-b2b-dark .stat-panel .stat-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Für dichte B2B-Abschnitte: Inter Bold statt Anton (Anton bleibt Standard für H1/Hero) */
+.b2b-heading {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}

@@ -1,0 +1,37 @@
+---
+import schritte from '../../data/prozess-schritte.json';
+
+interface Schritt {
+  nummer: number;
+  titel: string;
+  text: string;
+}
+const items = schritte as Schritt[];
+---
+
+<section class="section-surface px-4 py-16 md:py-24">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <span class="pill-label">So funktioniert's</span>
+      <h2 class="font-display text-fluid-h2 text-foreground mb-4">In vier Schritten zur passenden bAV</h2>
+      <p class="font-body text-fluid-body text-muted-foreground">
+        Von der Erstanalyse bis zur laufenden Betreuung — wir begleiten Sie durch den gesamten Prozess.
+      </p>
+    </div>
+
+    <div class="relative grid md:grid-cols-4 gap-8 md:gap-6">
+      <!-- Verbindungslinie (nur Desktop) -->
+      <div class="hidden md:block absolute top-6 left-[12.5%] right-[12.5%] h-px bg-border" aria-hidden="true"></div>
+
+      {items.map((s) => (
+        <div class="scroll-fade-in relative flex flex-col items-center md:items-start text-center md:text-left gap-3">
+          <div class="relative z-10 h-12 w-12 rounded-full brand-gradient text-white font-display text-lg flex items-center justify-center shadow-md shrink-0">
+            {s.nummer}
+          </div>
+          <h3 class="b2b-heading text-base text-foreground">{s.titel}</h3>
+          <p class="font-body text-sm text-muted-foreground leading-relaxed">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

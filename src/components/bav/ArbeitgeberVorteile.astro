@@ -1,0 +1,35 @@
+---
+import Icon from './Icon.astro';
+import vorteile from '../../data/arbeitgeber-vorteile.json';
+
+interface Vorteil {
+  icon: string;
+  titel: string;
+  text: string;
+}
+const items = vorteile as Vorteil[];
+---
+
+<section class="section-bg px-4 py-16 md:py-24" id="vorteile">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+      <span class="pill-label">Ihre Vorteile als Arbeitgeber</span>
+      <h2 class="font-display text-fluid-h2 text-foreground mb-4">Warum sich bAV für Ihr Unternehmen lohnt</h2>
+      <p class="font-body text-fluid-body text-muted-foreground">
+        Betriebliche Altersvorsorge ist mehr als eine Zusatzleistung — richtig aufgesetzt wird sie zum handfesten Vorteil für Ihr Unternehmen.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {items.map((v) => (
+        <div class="benefit-card card-hover scroll-fade-in">
+          <div class="benefit-icon">
+            <Icon name={v.icon} class="h-5 w-5" />
+          </div>
+          <h3>{v.titel}</h3>
+          <p>{v.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+{
+  "story": [
+    "Seit über 15 Jahren stehen wir im direkten Kontakt mit Menschen, die uns ihre finanzielle Absicherung anvertrauen. Dabei ist uns immer wieder dieselbe Beobachtung begegnet: Bei vielen Arbeitnehmerinnen und Arbeitnehmern klafft eine erhebliche Rentenlücke – häufig, ohne dass es ihnen überhaupt bewusst ist.",
+    "Im Gespräch mit Geschäftsführungen und Personalverantwortlichen zeigte sich ein zweites, eng damit verwandtes Muster: Die meisten Unternehmen wissen, dass betriebliche Altersvorsorge ein wirksames Instrument zur Mitarbeiterbindung ist – scheitern in der Praxis aber an der Umsetzung, an rechtlichen Fallstricken oder schlicht am Zeitaufwand neben dem Tagesgeschäft.",
+    "Genau für dieses Spannungsfeld haben wir eine Lösung entwickelt. Um Arbeitgeber nicht nur zu beraten, sondern sie auch verlässlich vor teuren Fehlern zu schützen, haben wir uns gezielt zum Experten für betriebliche Altersversorgung bei der Deutschen Versicherungsakademie (DVA) weitergebildet. Unser Ziel: Ihnen als Arbeitgeber die Arbeit abzunehmen, Sie über Fallstricke und rechtliche Rahmenbedingungen aufzuklären – und gemeinsam mit Ihnen eine bAV-Lösung umzusetzen, die für Ihr Unternehmen und Ihre Mitarbeitenden wirklich funktioniert."
+  ],
+  "gruender": [
+    {
+      "id": "martin",
+      "vorname": "Martin",
+      "nachname": "Schmidt",
+      "rolle": "Geschäftsführer",
+      "qualifikation": "Experte Betriebliche Altersversorgung (DVA)",
+      "foto": "martin",
+      "bio": "Seit über 15 Jahren im persönlichen Kontakt mit Unternehmen und ihren Mitarbeitenden verantwortet Martin bei DieFinanzchecker den Bereich betriebliche Altersvorsorge — von der ersten Bestandsaufnahme bis zur Umsetzung individueller Lösungen für Ihr Unternehmen."
+    },
+    {
+      "id": "jannis",
+      "vorname": "Jannis",
+      "nachname": "Oberhaus",
+      "rolle": "Geschäftsführer",
+      "qualifikation": "Experte Betriebliche Altersversorgung (DVA)",
+      "foto": "jannis",
+      "bio": "Jannis sorgt dafür, dass Ihre bAV nicht nur auf dem Papier funktioniert, sondern im Unternehmensalltag — rechtssicher aufgesetzt, verständlich erklärt und langfristig verlässlich betreut."
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+---
+// "Ohne DieFinanzchecker" vs. "Mit DieFinanzchecker" — B2B/bAV-Variante des bewährten
+// Vergleichsmusters aus DFC-empfehlung. Bewusst NICHT die Original-Punkte übernommen
+// (die drehten sich um Produktauswahl/§84 vs. §93 HGB für Privatkunden) — hier auf die
+// konkrete Situation von Arbeitgebern bei der bAV zugeschnitten. Überschrift bewusst in
+// Inter Bold (.b2b-heading, Sie-Ansprache, Satzform) statt Anton-Caps mit Verlaufstext,
+// damit sie klar lesbar bleibt statt "verschwommen" zu wirken.
+
+const ohne = [
+  'Anbietervergleich, Vertragsverwaltung und laufende Rückfragen bleiben komplett an Ihrer HR-Abteilung hängen',
+  'Bei Fehlern in der Durchführung haftet im Zweifel Ihr Unternehmen',
+  'Ohne breiten Marktüberblick wird oft der erstbeste Anbieter gewählt statt der passendste',
+];
+
+const mit = [
+  'Wir übernehmen Anbietervergleich, Vertragsverwaltung und die laufende Betreuung komplett für Sie',
+  'Fachkundige Begleitung reduziert Ihr Haftungsrisiko und hält Sie BetrAVG-konform',
+  'Breiter Marktüberblick — Sie erhalten die für Ihr Unternehmen wirklich passende Lösung',
+];
+---
+
+<section class="section-bg px-4 py-16 md:py-20">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="pill-label">Der Unterschied</span>
+      <h2 class="b2b-heading text-2xl md:text-3xl text-foreground mb-4">
+        Was sich für Ihr Unternehmen ändert
+      </h2>
+      <p class="font-body text-fluid-body text-muted-foreground">
+        So sieht der Alltag mit betrieblicher Altersvorsorge aus — mit und ohne DieFinanzchecker an Ihrer Seite.
+      </p>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-4">
+      <!-- OHNE DieFinanzchecker -->
+      <div
+        class="flex-1 rounded-2xl p-7 border flex flex-col gap-4 scroll-fade-in"
+        style="background: #fff8f8; border-color: rgba(239,68,68,0.18);"
+      >
+        <p class="b2b-heading text-base text-foreground mb-0">
+          Ohne <span style="color: #ef4444;">DieFinanzchecker</span>
+        </p>
+        <div class="flex flex-col gap-3">
+          {ohne.map((t) => (
+            <div class="flex gap-2.5 items-start">
+              <svg viewBox="0 0 20 20" fill="none" class="flex-shrink-0 mt-0.5 h-[1.1rem] w-[1.1rem]" aria-hidden="true">
+                <circle cx="10" cy="10" r="10" fill="#ef4444" opacity="0.1" />
+                <path d="M7 7l6 6M13 7l-6 6" stroke="#ef4444" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+              <p class="font-body text-sm leading-relaxed m-0 text-foreground/80">{t}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- MIT DieFinanzchecker -->
+      <div
+        class="flex-1 rounded-2xl p-7 border flex flex-col gap-4 scroll-fade-in"
+        style="background: linear-gradient(135deg,#f0f3ff,#f5f9ff); border-color: rgba(61,80,255,0.18);"
+      >
+        <p class="b2b-heading text-base text-foreground mb-0">
+          Mit <span style="color: #3D50FF;">DieFinanzchecker</span>
+        </p>
+        <div class="flex flex-col gap-3">
+          {mit.map((t) => (
+            <div class="flex gap-2.5 items-start">
+              <svg viewBox="0 0 20 20" fill="none" class="flex-shrink-0 mt-0.5 h-[1.1rem] w-[1.1rem]" aria-hidden="true">
+                <circle cx="10" cy="10" r="10" fill="#3D50FF" opacity="0.12" />
+                <path d="M6 10.5l3 3 5-6" stroke="#3D50FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <p class="font-body text-sm leading-relaxed m-0 text-foreground/80">{t}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

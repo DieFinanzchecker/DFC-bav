@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/bav/Hero.astro';
+import PainPoints from '../components/bav/PainPoints.astro';
+import ArbeitgeberVorteile from '../components/bav/ArbeitgeberVorteile.astro';
+import Vergleich from '../components/bav/Vergleich.astro';
+import SoFunktionierts from '../components/bav/SoFunktionierts.astro';
+import KontaktFormular from '../components/bav/KontaktFormular.astro';
+import TrustSection from '../components/bav/TrustSection.astro';
+import ReviewsCarousel from '../components/empfehlung/ReviewsCarousel.astro';
+import MitarbeiterVorteile from '../components/bav/MitarbeiterVorteile.astro';
+import UeberDieGruender from '../components/bav/UeberDieGruender.astro';
+import FAQ from '../components/bav/FAQ.astro';
+import FinalCta from '../components/bav/FinalCta.astro';
+---
+
+<BaseLayout
+  title="Betriebliche Altersvorsorge für Arbeitgeber | DieFinanzchecker GmbH"
+  description="Betriebliche Altersvorsorge für Ihr Unternehmen: Wir übernehmen Analyse, Konzept, Anbieterauswahl und laufende Betreuung — kostenvorteilhaft, rechtssicher und ohne Mehraufwand für Ihre HR-Abteilung. Jetzt kostenloses Erstgespräch sichern."
+  image="/images/dfc-logo.svg"
+>
+  <!-- TODO_DFC: Es existiert noch kein eigenes OG-Bild für DFC-bAV — bis dahin
+       dient das DFC-Logo als Platzhalter für Social-/Messenger-Vorschauen. -->
+  <Hero />
+  <PainPoints />
+  <ArbeitgeberVorteile />
+  <Vergleich />
+  <SoFunktionierts />
+  <TrustSection />
+  <MitarbeiterVorteile />
+  <UeberDieGruender />
+  <ReviewsCarousel />
+  <KontaktFormular />
+  <FAQ />
+  <FinalCta />
+</BaseLayout>

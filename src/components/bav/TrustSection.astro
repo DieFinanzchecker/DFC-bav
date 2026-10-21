@@ -1,0 +1,33 @@
+---
+// Zeigt nur die Kennzahlen-/Badge-Zeile ("DieFinanzchecker in Zahlen").
+// Die Google-Bewertungen (ReviewsCarousel, "Was andere sagen") werden separat und
+// weiter unten direkt nach der "Über uns"-Sektion eingebunden (siehe index.astro).
+import GoogleTrustBadge from '../empfehlung/GoogleTrustBadge.astro';
+import agentur from '../../data/agentur.json';
+
+interface Stat {
+  value: string;
+  label: string;
+}
+const stats = agentur.stats as Stat[];
+---
+
+<section class="section-surface pt-16 md:pt-20 pb-4">
+  <div class="max-w-4xl mx-auto px-4 text-center mb-12">
+    <span class="pill-label">Vertrauen, das man sieht</span>
+    <h2 class="font-display text-fluid-h2 text-foreground mb-6">DieFinanzchecker in Zahlen</h2>
+
+    <div class="flex justify-center mb-8">
+      <GoogleTrustBadge variant="card" />
+    </div>
+
+    <div class="stat-panel" data-cols={stats.length}>
+      {stats.map((s) => (
+        <div class="text-center">
+          <p class="stat-value text-foreground">{s.value}</p>
+          <p class="stat-label">{s.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

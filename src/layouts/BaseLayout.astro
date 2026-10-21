@@ -1,0 +1,159 @@
+---
+import '../styles/global.css';
+import StickyWhatsappCta from '../components/StickyWhatsappCta.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  // Titel/Text für Social- und Messenger-Vorschauen (og:/twitter:). Fallen auf
+  // title/description zurück, falls nicht gesetzt.
+  ogTitle?: string;
+  ogDescription?: string;
+}
+
+const {
+  title,
+  description,
+  image = '/images/dfc-logo.svg',
+  ogTitle = title,
+  ogDescription = description,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const calendly = 'https://calendly.com/diefinanzchecker/kennenlerntermin';
+const navCtaText = 'Kostenloses Erstgespräch sichern';
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0F110C" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- SEO: diese Seite soll von Google gefunden werden (kein noindex) -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="DieFinanzchecker" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+
+    <!-- Fonts: Inter und Anton lokal (DSGVO-konform, kein Google Fonts) -->
+    <link rel="preload" href="/fonts/inter/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/anton/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+
+  <body class="noise-bg">
+
+    <!-- Floating Nav: weiß, abgerundet, mit Schatten — analog DFC-Hauptseite -->
+    <nav class="fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-5xl">
+      <div class="bg-white rounded-full shadow-[0_4px_24px_rgba(0,0,0,0.08)] flex items-center justify-between px-3 py-2 sm:px-6 sm:py-3">
+        <a href="https://diefinanzchecker.de" target="_blank" rel="noopener noreferrer" class="shrink-0">
+          <img src="/images/dfc-logo.svg" alt="DieFinanzchecker" class="h-6 sm:h-8 w-auto" />
+        </a>
+        <a
+          href="#kontakt"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-full font-body font-semibold text-xs sm:text-sm px-3.5 py-2 sm:px-6 sm:py-2.5 brand-gradient text-white hover:brightness-110 shimmer shadow-lg shadow-primary/20 transition-all duration-300"
+        >
+          <span class="sm:hidden">Termin sichern</span>
+          <span class="hidden sm:inline">{navCtaText}</span>
+        </a>
+      </div>
+    </nav>
+
+    <main class="pt-[80px]">
+      <slot />
+    </main>
+
+    <StickyWhatsappCta />
+
+    <footer class="section-dark border-t border-white/20">
+      <div class="max-w-6xl mx-auto px-4 py-10">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="text-center md:text-left">
+            <p class="font-display text-xl font-semibold tracking-tight text-white">DieFinanzchecker GmbH</p>
+            <p class="font-body text-sm text-white/50 mt-1">Stockholmer Str. 15</p>
+            <p class="font-body text-sm text-white/50 mt-0.5">48163 Münster</p>
+            <p class="font-body text-sm text-white/50 mt-0.5">
+              <a href="mailto:info@diefinanzchecker.de" class="hover:text-white/80 transition-colors">info@diefinanzchecker.de</a>
+            </p>
+          </div>
+          <a
+            href={calendly}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-body text-sm text-white/60 hover:text-white/90 underline underline-offset-2 transition-colors"
+          >
+            Erstgespräch buchen →
+          </a>
+        </div>
+
+        <div class="border-t border-white/10 mt-8 pt-6 flex flex-wrap items-center justify-center gap-4 text-xs font-body text-white/50">
+          <span>© 2026 DieFinanzchecker GmbH</span>
+          <a href="https://diefinanzchecker.de/impressum" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">Impressum</a>
+          <a href="https://diefinanzchecker.de/datenschutz" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">Datenschutz</a>
+          <a href="https://diefinanzchecker.de/erstinformation" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">Erstinformation</a>
+          <a href="https://diefinanzchecker.de/transparenzverordnung" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">Transparenzverordnung</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Cloudflare Web Analytics (cookiefrei, DSGVO-konform) -->
+    <!-- TODO_DFC: Für DFC-bAV existiert noch kein eigenes Cloudflare-Analytics-Token.
+         Sobald eines für diese Site angelegt wurde, hier aktivieren (Token aus
+         DFC-empfehlung NICHT wiederverwenden — das zählt sonst fremden Traffic mit):
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "TODO_DFC_CF_ANALYTICS_TOKEN"}'></script>
+    -->
+
+    <!-- Scroll-Animationen -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target as HTMLElement;
+              const siblings = el.parentElement?.querySelectorAll('.scroll-fade-in:not(.visible)');
+              let delay = 0;
+              siblings?.forEach((sibling) => {
+                if (sibling === el || !sibling.classList.contains('visible')) {
+                  setTimeout(() => sibling.classList.add('visible'), delay);
+                  delay += 150;
+                }
+              });
+              el.classList.add('visible');
+              observer.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.01 }
+      );
+      document.querySelectorAll('.scroll-fade-in').forEach((el) => observer.observe(el));
+
+      // Fallback: nach 1500ms alle ungetriggerten Elemente zwangs-visible.
+      // Greift bei IntersectionObserver-Aussetzern (programmatischer Scroll, In-App-Browser, JS-Lag).
+      window.setTimeout(() => {
+        document.querySelectorAll('.scroll-fade-in:not(.visible)').forEach((el) => {
+          el.classList.add('visible');
+        });
+      }, 1500);
+    </script>
+  </body>
+</html>

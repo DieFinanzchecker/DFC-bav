@@ -1,0 +1,51 @@
+---
+import Icon from './Icon.astro';
+
+const painPoints = [
+  {
+    icon: 'users',
+    titel: 'Fachkräftemangel',
+    text: 'Gute Leute zu finden und zu halten wird schwerer — ohne überzeugende Zusatzleistungen verlieren Sie im Wettbewerb um Talente.',
+  },
+  {
+    icon: 'scale',
+    titel: 'Gesetzlicher Anspruch',
+    text: 'Ihre Mitarbeitenden haben einen gesetzlichen Anspruch auf Entgeltumwandlung — ohne saubere Lösung entsteht schnell Unsicherheit im Unternehmen.',
+  },
+  {
+    icon: 'alert-triangle',
+    titel: 'Haftungsrisiko',
+    text: 'Fehler bei der Durchführung einer bAV können zu Nachforderungen und Haftungsrisiken für Ihr Unternehmen führen.',
+  },
+  {
+    icon: 'clipboard',
+    titel: 'Verwaltungsaufwand',
+    text: 'Anbietervergleich, Vertragsverwaltung, laufende Pflege — ohne Unterstützung bindet das wertvolle Zeit Ihrer HR-Abteilung.',
+  },
+];
+---
+
+<section class="section-surface px-4 py-16 md:py-20">
+  <div class="max-w-5xl mx-auto text-center">
+    <h2 class="font-display text-fluid-h2 text-foreground mb-4">Kommt Ihnen das bekannt vor?</h2>
+    <p class="font-body text-fluid-body text-muted-foreground max-w-2xl mx-auto mb-12">
+      Viele Arbeitgeber stehen beim Thema betriebliche Altersvorsorge vor denselben Herausforderungen.
+    </p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left">
+      {painPoints.map((p) => (
+        <div class="scroll-fade-in flex flex-col gap-3 bg-background rounded-2xl border border-border p-6">
+          <div class="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-[hsl(var(--accent))]/10 text-[hsl(var(--accent))]">
+            <Icon name={p.icon} class="h-5 w-5" />
+          </div>
+          <h3 class="b2b-heading text-base text-foreground">{p.titel}</h3>
+          <p class="font-body text-sm text-muted-foreground leading-relaxed">{p.text}</p>
+        </div>
+      ))}
+    </div>
+
+    <p class="font-body text-base text-foreground font-semibold mt-12">
+      Genau hier setzen wir an — mit einer bAV-Lösung, die für Sie funktioniert.
+    </p>
+  </div>
+</section>

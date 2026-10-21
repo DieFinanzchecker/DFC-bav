@@ -1,0 +1,78 @@
+---
+import unternehmen from '../../data/unternehmen.json';
+import martinFoto from '../../assets/images/gruender/martin.avif';
+import jannisFoto from '../../assets/images/gruender/jannis.avif';
+import teamFoto from '../../assets/images/team.avif';
+
+interface Gruender {
+  id: string;
+  vorname: string;
+  nachname: string;
+  rolle: string;
+  qualifikation: string;
+  foto: string | null;
+  bio: string;
+}
+const { story, gruender } = unternehmen as { story: string[]; gruender: Gruender[] };
+
+const fotos: Record<string, string> = { martin: martinFoto.src, jannis: jannisFoto.src };
+const initialen = (vorname: string, nachname: string) => `${vorname[0]}${nachname[0]}`;
+---
+
+<section class="section-surface px-4 py-16 md:py-24">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="pill-label">Über uns</span>
+      <h2 class="font-display text-fluid-h2 text-foreground mb-4">Die Menschen hinter Ihrer Beratung</h2>
+      <p class="font-body text-fluid-body text-muted-foreground">
+        DieFinanzchecker GmbH wird geführt von zwei Experten für betriebliche Altersvorsorge.
+      </p>
+    </div>
+
+    <div class="scroll-fade-in max-w-3xl mx-auto mb-16 rounded-2xl border-l-4 border-primary bg-background p-6 md:p-8 shadow-sm">
+      {story.map((absatz) => (
+        <p class="font-body text-sm md:text-base text-muted-foreground leading-relaxed mb-4 last:mb-0">
+          {absatz}
+        </p>
+      ))}
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-8">
+      {gruender.map((g) => (
+        <div class="scroll-fade-in bg-background rounded-2xl border border-border p-6 md:p-8 flex flex-col items-center text-center gap-4">
+          {fotos[g.foto ?? ''] ? (
+            <img
+              src={fotos[g.foto as string]}
+              alt={`${g.vorname} ${g.nachname}, ${g.rolle} DieFinanzchecker GmbH`}
+              class="h-20 w-20 rounded-full object-cover object-top shadow-md"
+            />
+          ) : (
+            <div class="h-20 w-20 rounded-full brand-gradient flex items-center justify-center text-white font-display text-xl shadow-md">
+              {initialen(g.vorname, g.nachname)}
+            </div>
+          )}
+
+          <div>
+            <p class="font-body font-semibold text-foreground">{g.vorname} {g.nachname}</p>
+            <p class="font-body text-sm text-muted-foreground">{g.rolle}</p>
+          </div>
+
+          <span class="pill-label !mb-0 !py-1.5 !px-3 !text-[11px]">{g.qualifikation}</span>
+
+          <p class="font-body text-sm text-muted-foreground/80 leading-relaxed">
+            {g.bio}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <div class="scroll-fade-in mt-12 rounded-2xl overflow-hidden shadow-lg">
+      <img
+        src={teamFoto.src}
+        alt="Das Team der DieFinanzchecker GmbH"
+        class="w-full aspect-[3/2] object-cover"
+        style="object-position: center 30%;"
+      />
+    </div>
+  </div>
+</section>

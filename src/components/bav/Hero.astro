@@ -1,0 +1,68 @@
+---
+import GoogleTrustBadge from '../empfehlung/GoogleTrustBadge.astro';
+import martinFoto from '../../assets/images/gruender/martin.avif';
+import jannisFoto from '../../assets/images/gruender/jannis.avif';
+---
+
+<section class="section-bg px-4 pt-10 pb-16 md:pt-16 md:pb-24">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-10 items-center">
+
+    <!-- Linke Spalte: Headline, Subheadline, CTAs, Trust-Strip -->
+    <div class="text-center md:text-left">
+      <span class="pill-label">Für Arbeitgeber &amp; HR</span>
+      <h1 class="font-display text-fluid-hero text-foreground mb-5">
+        Betriebliche Altersvorsorge,<br class="hidden md:block" /> die Ihrem Unternehmen wirklich nützt.
+      </h1>
+      <p class="font-body text-fluid-body text-muted-foreground max-w-xl mx-auto md:mx-0 mb-8">
+        Wir übernehmen für Sie Analyse, Konzept, Anbieterauswahl und laufende Betreuung — damit Ihre bAV Mitarbeitende bindet, Kosten spart und Ihre HR-Abteilung entlastet, statt sie zu beschäftigen.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center gap-4 mb-8 justify-center md:justify-start">
+        <a
+          href="#kontakt"
+          class="cta-hover shimmer inline-flex items-center justify-center gap-2 rounded-full font-body font-semibold text-base px-7 py-3.5 brand-gradient text-white shadow-lg shadow-primary/25 transition-all duration-300 w-full sm:w-auto"
+        >
+          Kostenloses Erstgespräch sichern
+        </a>
+        <a
+          href="https://calendly.com/diefinanzchecker/kennenlerntermin"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cta-hover inline-flex items-center justify-center gap-2 rounded-full font-body font-semibold text-base px-7 py-3.5 border border-border text-foreground hover:bg-secondary transition-all duration-300 w-full sm:w-auto"
+        >
+          Termin direkt per Calendly buchen
+        </a>
+      </div>
+
+      <div class="flex justify-center md:justify-start">
+        <GoogleTrustBadge variant="compact" />
+      </div>
+    </div>
+
+    <!-- Rechte Spalte: großformatiges Doppelporträt Martin & Jannis -->
+    <div class="scroll-fade-in">
+      <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-border/40 max-w-md mx-auto">
+        <div class="grid grid-cols-2">
+          <img
+            src={martinFoto.src}
+            alt="Martin Schmidt, Geschäftsführer DieFinanzchecker GmbH"
+            class="w-full aspect-[3/4] object-cover object-top"
+          />
+          <img
+            src={jannisFoto.src}
+            alt="Jannis Oberhaus, Geschäftsführer DieFinanzchecker GmbH"
+            class="w-full aspect-[3/4] object-cover object-top"
+          />
+        </div>
+        <div class="bg-background px-5 py-4 text-center">
+          <p class="font-body font-semibold text-foreground">Martin Schmidt &amp; Jannis Oberhaus</p>
+          <p class="font-body text-sm text-muted-foreground mt-1">Geschäftsführer, DieFinanzchecker GmbH</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Trigger für den Sticky-WhatsApp-Button: erscheint erst, sobald der Hero verlassen wurde -->
+<div id="sticky-trigger" aria-hidden="true" class="h-px"></div>

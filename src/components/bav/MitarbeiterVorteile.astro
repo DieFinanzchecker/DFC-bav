@@ -1,0 +1,46 @@
+---
+import Icon from './Icon.astro';
+import vorteile from '../../data/mitarbeiter-vorteile.json';
+
+interface Vorteil {
+  icon: string;
+  titel: string;
+  text: string;
+}
+const items = vorteile as Vorteil[];
+
+// Drei Akzentfarben aus der Markenpalette, abwechselnd pro Karte — sorgt für
+// spürbar mehr Farbe/Highlights in diesem sonst sehr zurückhaltenden Abschnitt.
+const akzente = [
+  { bg: 'rgba(61,80,255,0.1)', color: '#3D50FF' }, // Markenblau
+  { bg: 'rgba(242,99,39,0.1)', color: '#F26327' }, // Orange
+  { bg: 'rgba(61,173,255,0.12)', color: '#3DADFF' }, // Hellblau
+];
+---
+
+<section class="px-4 py-16 md:py-20" style="background: linear-gradient(135deg, rgba(61,80,255,0.05), rgba(242,99,39,0.04));">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center max-w-xl mx-auto mb-10">
+      <span class="pill-label">Vorteile für Ihr Team</span>
+      <h2 class="b2b-heading text-xl md:text-2xl text-foreground mb-2">Das kommt bei Ihrem Team an</h2>
+      <p class="font-body text-sm text-muted-foreground">
+        Auch Ihre Mitarbeitenden profitieren spürbar — ein zusätzliches Argument für die Einführung.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-5">
+      {items.map((v, i) => {
+        const akzent = akzente[i % akzente.length];
+        return (
+          <div class="benefit-card card-hover scroll-fade-in">
+            <div class="benefit-icon" style={`background-color: ${akzent.bg}; color: ${akzent.color};`}>
+              <Icon name={v.icon} class="h-5 w-5" />
+            </div>
+            <h3>{v.titel}</h3>
+            <p>{v.text}</p>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
