@@ -1,0 +1,10 @@
+{
+  "_hinweis": "Zentrale Rechenwerte für den Förderrechner und alle Textstellen. Zum 01.01. jedes Jahres prüfen und anpassen (BBG steigt -> 4-%-Grenze steigt automatisch mit).",
+  "stand": 2026,
+  "bbgRvMonat": 8450,
+  "bbgKvMonat": 5812.5,
+  "svFreiAnteilBbg": 0.04,
+  "agSatzRvAv": 0.106,
+  "agSatzKvPv": 0.1055,
+  "pflichtzuschuss": 0.15
+}

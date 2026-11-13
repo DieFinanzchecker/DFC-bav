@@ -1,23 +1,23 @@
 [
   {
-    "icon": "coins",
-    "titel": "Kostenvorteil durch Entgeltumwandlung",
-    "text": "Über die sozialabgabenoptimierte Entgeltumwandlung profitieren Sie und Ihre Mitarbeitenden von spürbaren Einsparungen bei Sozialabgaben und Steuern — ein handfester finanzieller Vorteil für beide Seiten, ganz ohne zusätzliche Gehaltskosten."
+    "icon": "users",
+    "titel": "Mitarbeiter binden und gewinnen",
+    "text": "Im Wettbewerb um Fachkräfte ist eine gute betriebliche Altersvorsorge ein starkes Argument. Wer eine bAV mit Arbeitgeberzuschuss hat, überlegt sich einen Wechsel zweimal, und in Stellenanzeigen heben Sie sich sichtbar von der Konkurrenz ab."
   },
   {
-    "icon": "users",
-    "titel": "Employer Branding & Mitarbeiterbindung",
-    "text": "Im Wettbewerb um Fachkräfte ist eine gute betriebliche Altersvorsorge ein starkes Argument. Sie zeigen Verantwortung für Ihre Mitarbeitenden und heben sich als attraktiver Arbeitgeber von der Konkurrenz ab."
+    "icon": "shield-check",
+    "titel": "Rechtsansprüche erfüllen, Haftung reduzieren",
+    "text": "Ihre Mitarbeitenden haben einen Rechtsanspruch auf Entgeltumwandlung und auf den Arbeitgeberzuschuss. Mit fachkundiger Begleitung erfüllen Sie diese Ansprüche sauber und reduzieren Ihr Haftungsrisiko nach dem Betriebsrentengesetz."
+  },
+  {
+    "icon": "coins",
+    "titel": "Zuschuss finanziert sich über Sozialabgaben",
+    "text": "Bei der Entgeltumwandlung sparen Sie als Arbeitgeber Sozialabgaben. In vielen Fällen deckt diese Ersparnis den Arbeitgeberzuschuss vollständig, ganz ohne zusätzliche Gehaltskosten."
   },
   {
     "icon": "clipboard",
     "titel": "Administrative Entlastung Ihrer HR-Abteilung",
     "text": "Wir übernehmen Anbietervergleich, Vertragsverwaltung und die laufende Betreuung — Ihre Personalabteilung wird spürbar entlastet und kann sich auf ihre eigentlichen Aufgaben konzentrieren."
-  },
-  {
-    "icon": "shield-check",
-    "titel": "Rechtssicherheit & Haftungsreduktion",
-    "text": "Die Regelungen des BetrAVG sind komplex und ändern sich laufend. Mit fachkundiger Begleitung reduzieren Sie Haftungsrisiken und stellen sicher, dass Ihr Unternehmen rechtssicher aufgestellt ist."
   },
   {
     "icon": "layers",

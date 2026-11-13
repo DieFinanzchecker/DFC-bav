@@ -1,0 +1,25 @@
+---
+// Kennzahlen-Leiste direkt unter dem Hero. Die Werte mit BBG-Bezug werden aus den
+// zentralen Rechenwerten abgeleitet, damit sie beim Jahreswechsel automatisch mitziehen.
+import werte from '../../data/rechenwerte.json';
+import { maxUmwandlung } from '../../lib/rechner';
+
+const quote = Math.round((werte.agSatzRvAv + werte.agSatzKvPv) * 100);
+const zahlen = [
+  { wert: `${Math.round(werte.pflichtzuschuss * 100)} %`, text: 'gesetzlicher Pflichtzuschuss bei Entgeltumwandlung' },
+  { wert: `ca. ${quote} %`, text: 'sparen Sie als Arbeitgeber an Sozialabgaben auf den umgewandelten Betrag' },
+  { wert: `${maxUmwandlung} €`, text: `pro Monat steuer- und sozialabgabenfrei umwandelbar (${werte.stand})` },
+  { wert: '0 €', text: 'kostet Sie unsere Erstanalyse Ihrer bestehenden bAV' },
+];
+---
+
+<section class="px-4 py-14 md:py-16 border-y border-white/8 bg-white/[0.02]">
+  <div class="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+    {zahlen.map((z) => (
+      <div class="scroll-fade-in text-center">
+        <p class="font-display text-4xl md:text-5xl brand-gradient-text leading-none">{z.wert}</p>
+        <p class="font-body text-sm text-white/65 mt-3 max-w-[15rem] mx-auto leading-snug">{z.text}</p>
+      </div>
+    ))}
+  </div>
+</section>

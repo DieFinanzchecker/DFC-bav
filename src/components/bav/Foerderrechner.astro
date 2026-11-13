@@ -1,0 +1,194 @@
+---
+// Förderrechner aus Arbeitgebersicht: zeigt, dass der Arbeitgeberzuschuss (z. B. die
+// gesetzlichen 15 %) über die eingesparten Sozialabgaben finanziert wird.
+// Rechenlogik: src/lib/rechner.ts, Jahreswerte: src/data/rechenwerte.json.
+import Icon from './Icon.astro';
+import werte from '../../data/rechenwerte.json';
+import { maxUmwandlung } from '../../lib/rechner';
+
+const regler = [
+  { id: 'mitarbeitende', label: 'Mitarbeitende mit bAV', min: 1, max: 250, step: 1, wert: 20, einheit: '' },
+  { id: 'gehalt', label: 'Ø Bruttogehalt pro Monat', min: 2000, max: 10000, step: 100, wert: 3500, einheit: '€' },
+  { id: 'umwandlung', label: 'Ø Entgeltumwandlung pro Monat', min: 25, max: maxUmwandlung, step: 1, wert: 150, einheit: '€' },
+  { id: 'zuschussProzent', label: 'Ihr Arbeitgeberzuschuss', min: 0, max: 50, step: 1, wert: 15, einheit: '%' },
+];
+const schnellwahl = [15, 20, 30];
+const euro = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
+---
+
+<section id="rechner" class="glow-section px-4 py-20 md:py-28 scroll-mt-24">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+      <span class="pill-label">Förderrechner für Arbeitgeber</span>
+      <h2 class="font-display text-fluid-h2 text-white mb-4">
+        Was kostet Sie der Arbeitgeberzuschuss <span class="akzent">wirklich?</span>
+      </h2>
+      <p class="font-body text-fluid-body text-white/65">
+        Wandeln Mitarbeitende Gehalt in bAV um, sparen Sie als Arbeitgeber Sozialabgaben. Diese Ersparnis finanziert Ihren Zuschuss. Rechnen Sie es mit Ihren Zahlen nach.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-6" data-rechner>
+      <!-- Eingaben -->
+      <div class="glass-card p-6 md:p-9 flex flex-col gap-8">
+        {regler.map((r) => (
+          <div>
+            <div class="flex items-baseline justify-between gap-4 mb-3">
+              <label for={`r-${r.id}`} class="font-body text-sm md:text-base text-white/80">{r.label}</label>
+              <output for={`r-${r.id}`} data-anzeige={r.id} data-einheit={r.einheit} class="font-display text-2xl text-white whitespace-nowrap">
+                {euro(r.wert)}{r.einheit ? ` ${r.einheit}` : ''}
+              </output>
+            </div>
+            <input
+              id={`r-${r.id}`}
+              data-eingabe={r.id}
+              type="range"
+              min={r.min}
+              max={r.max}
+              step={r.step}
+              value={r.wert}
+              class="regler"
+            />
+            {r.id === 'zuschussProzent' && (
+              <div class="flex flex-wrap items-center gap-2 mt-4">
+                {schnellwahl.map((p) => (
+                  <button
+                    type="button"
+                    data-schnellwahl={p}
+                    class="rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 font-body text-xs font-semibold text-white/80 hover:bg-white/12 hover:text-white transition-colors"
+                  >
+                    {p} %{p === 15 ? ' (Pflicht)' : ''}
+                  </button>
+                ))}
+              </div>
+            )}
+            {r.id === 'umwandlung' && (
+              <p class="font-body text-xs text-white/45 mt-3">
+                Bis {maxUmwandlung} € pro Monat steuer- und sozialabgabenfrei (4 % der Beitragsbemessungsgrenze {werte.stand}).
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <!-- Ergebnis -->
+      <div class="glass-card p-6 md:p-9 flex flex-col shadow-[0_0_90px_-30px_rgba(61,110,255,0.8)]" aria-live="polite">
+        <p class="font-body text-xs font-semibold uppercase tracking-[0.2em] text-[#3DADFF] mb-3">Ihr Ergebnis pro Jahr</p>
+        <p class="font-display text-5xl md:text-6xl leading-none text-white" data-aus="hauptzahl">0 €</p>
+        <p class="font-body text-lg md:text-xl font-semibold text-white mt-3" data-aus="hauptzeile">Mehrkosten für Ihr Unternehmen</p>
+        <p class="font-body text-sm text-white/65 mt-2 leading-relaxed" data-aus="erklaerung"></p>
+
+        <div class="mt-8 flex flex-col gap-5">
+          <div>
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 font-body text-sm mb-2">
+              <span class="text-white/75">Ihre Ersparnis bei den Sozialabgaben</span>
+              <span class="font-semibold text-[#3DADFF]" data-aus="ersparnisJahr"></span>
+            </div>
+            <div class="h-2.5 rounded-full bg-white/8 overflow-hidden">
+              <div class="h-full rounded-full brand-gradient transition-[width] duration-300" data-balken="ersparnis"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 font-body text-sm mb-2">
+              <span class="text-white/75">Ihr Arbeitgeberzuschuss</span>
+              <span class="font-semibold text-[#F26327]" data-aus="zuschussJahr"></span>
+            </div>
+            <div class="h-2.5 rounded-full bg-white/8 overflow-hidden">
+              <div class="h-full rounded-full bg-[#F26327] transition-[width] duration-300" data-balken="zuschuss"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 grid grid-cols-2 gap-4">
+          <div class="rounded-2xl bg-white/5 border border-white/8 p-4">
+            <p class="font-display text-2xl text-white" data-aus="neutralBis"></p>
+            <p class="font-body text-xs text-white/55 mt-1 leading-snug">Zuschuss sind für Sie kostenneutral</p>
+          </div>
+          <div class="rounded-2xl bg-white/5 border border-white/8 p-4">
+            <p class="font-display text-2xl text-white" data-aus="fuerTeam"></p>
+            <p class="font-body text-xs text-white/55 mt-1 leading-snug">Zuschuss pro Jahr kommen bei Ihrem Team an</p>
+          </div>
+        </div>
+
+        <a href="#kontakt" class="btn-primary mt-8 w-full">
+          Mit meinen echten Zahlen durchrechnen lassen
+          <Icon name="arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+
+    <p class="font-body text-xs text-white/45 max-w-4xl mx-auto mt-8 leading-relaxed text-center">
+      Vereinfachte Beispielrechnung mit Durchschnittswerten, Stand {werte.stand}: Arbeitgeberanteile zur Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung (inkl. durchschnittlichem Zusatzbeitrag), Beitragsbemessungsgrenzen {euro(werte.bbgKvMonat)} € (Kranken/Pflege) und {euro(werte.bbgRvMonat)} € (Rente/Arbeitslosen) pro Monat. Oberhalb dieser Grenzen sinkt die Ersparnis. Umlagen, Beiträge zur Berufsgenossenschaft und tarifliche Besonderheiten sind nicht berücksichtigt. Keine Steuer- oder Rechtsberatung.
+    </p>
+  </div>
+</section>
+
+<script>
+  import { berechne } from '../../lib/rechner';
+
+  const wurzel = document.querySelector<HTMLElement>('[data-rechner]');
+  if (wurzel) {
+    const eingaben = [...wurzel.querySelectorAll<HTMLInputElement>('[data-eingabe]')];
+    const aus = (name: string) => wurzel.querySelector<HTMLElement>(`[data-aus="${name}"]`)!;
+    const balken = (name: string) => wurzel.querySelector<HTMLElement>(`[data-balken="${name}"]`)!;
+    const euro = (n: number) => `${Math.round(n).toLocaleString('de-DE')} €`;
+
+    const aktualisiere = () => {
+      const w: Record<string, number> = {};
+      for (const e of eingaben) {
+        const wert = Number(e.value);
+        w[e.dataset.eingabe!] = wert;
+        const anteil = ((wert - Number(e.min)) / (Number(e.max) - Number(e.min))) * 100;
+        e.style.setProperty('--fuell', `${anteil}%`);
+        const anzeige = wurzel.querySelector<HTMLElement>(`[data-anzeige="${e.dataset.eingabe}"]`)!;
+        const einheit = anzeige.dataset.einheit;
+        anzeige.textContent = wert.toLocaleString('de-DE') + (einheit ? ` ${einheit}` : '');
+      }
+
+      const r = berechne({
+        mitarbeitende: w.mitarbeitende,
+        gehalt: w.gehalt,
+        umwandlung: w.umwandlung,
+        zuschussProzent: w.zuschussProzent,
+      });
+
+      const haupt = aus('hauptzahl');
+      if (r.saldoJahr >= 0) {
+        haupt.textContent = '0 €';
+        haupt.style.color = '#3DADFF';
+        aus('hauptzeile').textContent = 'Mehrkosten für Ihr Unternehmen';
+        aus('erklaerung').textContent =
+          w.zuschussProzent === 0
+            ? `Ohne Zuschuss bleiben Ihnen ${euro(r.saldoJahr)} Ersparnis pro Jahr. Achtung: Bei Entgeltumwandlung sind in der Regel 15 % Zuschuss gesetzlich vorgeschrieben.`
+            : `Ihr Zuschuss von ${w.zuschussProzent} % ist vollständig über die eingesparten Sozialabgaben finanziert. Es bleiben sogar ${euro(r.saldoJahr)} pro Jahr in Ihrem Unternehmen.`;
+      } else {
+        const gedeckt = Math.round((r.ersparnisJahr / r.zuschussJahr) * 100);
+        haupt.textContent = euro(-r.saldoJahr);
+        haupt.style.color = '#ffffff';
+        aus('hauptzeile').textContent = 'echter Aufwand für Ihr Unternehmen';
+        aus('erklaerung').textContent =
+          r.ersparnisJahr > 0
+            ? `Statt ${euro(r.zuschussJahr)} zahlen Sie unter dem Strich nur ${euro(-r.saldoJahr)}: ${gedeckt} % Ihres Zuschusses tragen die eingesparten Sozialabgaben.`
+            : 'Bei diesem Gehaltsniveau liegt das Gehalt über den Beitragsbemessungsgrenzen, es entsteht keine Ersparnis bei den Sozialabgaben.';
+      }
+
+      aus('ersparnisJahr').textContent = `${euro(r.ersparnisJahr)} (${euro(r.ersparnisMonat)} / Monat)`;
+      aus('zuschussJahr').textContent = `${euro(r.zuschussJahr)} (${euro(r.zuschussMonat)} / Monat)`;
+      const groesster = Math.max(r.ersparnisJahr, r.zuschussJahr, 1);
+      balken('ersparnis').style.width = `${(r.ersparnisJahr / groesster) * 100}%`;
+      balken('zuschuss').style.width = `${(r.zuschussJahr / groesster) * 100}%`;
+      aus('neutralBis').textContent = `bis ${r.kostenneutralBisProzent} %`;
+      aus('fuerTeam').textContent = euro(r.zuschussJahr);
+    };
+
+    eingaben.forEach((e) => e.addEventListener('input', aktualisiere));
+    wurzel.querySelectorAll<HTMLButtonElement>('[data-schnellwahl]').forEach((b) =>
+      b.addEventListener('click', () => {
+        const z = wurzel.querySelector<HTMLInputElement>('[data-eingabe="zuschussProzent"]')!;
+        z.value = b.dataset.schnellwahl!;
+        aktualisiere();
+      })
+    );
+    aktualisiere();
+  }
+</script>

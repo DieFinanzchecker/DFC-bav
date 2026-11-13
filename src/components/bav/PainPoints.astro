@@ -10,7 +10,7 @@ const painPoints = [
   {
     icon: 'scale',
     titel: 'Gesetzlicher Anspruch',
-    text: 'Ihre Mitarbeitenden haben einen gesetzlichen Anspruch auf Entgeltumwandlung — ohne saubere Lösung entsteht schnell Unsicherheit im Unternehmen.',
+    text: 'Ihre Mitarbeitenden haben einen Rechtsanspruch auf Entgeltumwandlung. Ohne saubere Lösung müssen Sie jeden Einzelfall neu regeln.',
   },
   {
     icon: 'alert-triangle',
@@ -25,27 +25,33 @@ const painPoints = [
 ];
 ---
 
-<section class="section-surface px-4 py-16 md:py-20">
-  <div class="max-w-5xl mx-auto text-center">
-    <h2 class="font-display text-fluid-h2 text-foreground mb-4">Kommt Ihnen das bekannt vor?</h2>
-    <p class="font-body text-fluid-body text-muted-foreground max-w-2xl mx-auto mb-12">
-      Viele Arbeitgeber stehen beim Thema betriebliche Altersvorsorge vor denselben Herausforderungen.
-    </p>
+<section class="px-4 py-20 md:py-28">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+      <span class="pill-label">Die Ausgangslage</span>
+      <h2 class="font-display text-fluid-h2 text-white mb-4">Kommt Ihnen das <span class="akzent">bekannt</span> vor?</h2>
+      <p class="font-body text-fluid-body text-white/65">
+        Viele Arbeitgeber stehen beim Thema betriebliche Altersvorsorge vor denselben Herausforderungen.
+      </p>
+    </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left">
-      {painPoints.map((p) => (
-        <div class="scroll-fade-in flex flex-col gap-3 bg-background rounded-2xl border border-border p-6">
-          <div class="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-[hsl(var(--accent))]/10 text-[hsl(var(--accent))]">
-            <Icon name={p.icon} class="h-5 w-5" />
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {painPoints.map((p, i) => (
+        <div class="glass-card card-hover scroll-fade-in flex flex-col gap-4 p-6">
+          <div class="flex items-center justify-between">
+            <span class="section-num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="inline-flex items-center justify-center h-11 w-11 rounded-full bg-[#F26327]/15 text-[#F26327]">
+              <Icon name={p.icon} class="h-5 w-5" />
+            </span>
           </div>
-          <h3 class="b2b-heading text-base text-foreground">{p.titel}</h3>
-          <p class="font-body text-sm text-muted-foreground leading-relaxed">{p.text}</p>
+          <h3 class="b2b-heading text-lg text-white">{p.titel}</h3>
+          <p class="font-body text-sm text-white/65 leading-relaxed">{p.text}</p>
         </div>
       ))}
     </div>
 
-    <p class="font-body text-base text-foreground font-semibold mt-12">
-      Genau hier setzen wir an — mit einer bAV-Lösung, die für Sie funktioniert.
+    <p class="font-body text-base md:text-lg text-white font-semibold mt-12 text-center">
+      Genau hier setzen wir an: mit einer bAV, die für Ihr Unternehmen funktioniert.
     </p>
   </div>
 </section>

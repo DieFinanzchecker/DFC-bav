@@ -3,6 +3,8 @@ import unternehmen from '../../data/unternehmen.json';
 import martinFoto from '../../assets/images/gruender/martin.avif';
 import jannisFoto from '../../assets/images/gruender/jannis.avif';
 import teamFoto from '../../assets/images/team.avif';
+import marke from '../../data/marke.json';
+import agentur from '../../data/agentur.json';
 
 interface Gruender {
   id: string;
@@ -19,32 +21,54 @@ const fotos: Record<string, string> = { martin: martinFoto.src, jannis: jannisFo
 const initialen = (vorname: string, nachname: string) => `${vorname[0]}${nachname[0]}`;
 ---
 
-<section class="section-surface px-4 py-16 md:py-24">
-  <div class="max-w-5xl mx-auto">
+<section id="ueber-uns" class="glow-section glow-right px-4 py-20 md:py-28 scroll-mt-24">
+  <div class="max-w-6xl mx-auto">
     <div class="text-center max-w-2xl mx-auto mb-12">
       <span class="pill-label">Über uns</span>
-      <h2 class="font-display text-fluid-h2 text-foreground mb-4">Die Menschen hinter Ihrer Beratung</h2>
-      <p class="font-body text-fluid-body text-muted-foreground">
-        DieFinanzchecker GmbH wird geführt von zwei Experten für betriebliche Altersvorsorge.
+      <h2 class="font-display text-fluid-h2 text-white mb-4">Ein Teil von <span class="akzent">DieFinanzchecker</span></h2>
+      <p class="font-body text-fluid-body text-white/65">
+        {marke.name} ist der Fachbereich für betriebliche Altersvorsorge der DieFinanzchecker GmbH aus Münster, geführt von zwei zertifizierten Experten für betriebliche Altersversorgung (DVA).
       </p>
     </div>
 
-    <div class="scroll-fade-in max-w-3xl mx-auto mb-16 rounded-2xl border-l-4 border-primary bg-background p-6 md:p-8 shadow-sm">
-      {story.map((absatz) => (
-        <p class="font-body text-sm md:text-base text-muted-foreground leading-relaxed mb-4 last:mb-0">
-          {absatz}
-        </p>
-      ))}
+    <div class="grid lg:grid-cols-[1.5fr_1fr] gap-6 mb-6">
+      <div class="scroll-fade-in glass-card p-6 md:p-9">
+        <p class="font-body text-xs font-semibold uppercase tracking-[0.2em] text-[#3DADFF] mb-4">Wie es dazu kam</p>
+        {story.map((absatz) => (
+          <p class="font-body text-sm md:text-base text-white/70 leading-relaxed mb-4 last:mb-0">
+            {absatz}
+          </p>
+        ))}
+      </div>
+      <div class="scroll-fade-in glass-card p-6 md:p-9 flex flex-col justify-between gap-8">
+        <div>
+          <p class="font-body text-xs font-semibold uppercase tracking-[0.2em] text-[#3DADFF] mb-4">Die Dachmarke</p>
+          <a href={marke.dachmarkeUrl} target="_blank" rel="noopener noreferrer" class="inline-block mb-4">
+            <img src="/images/dfc-logo.svg" alt="DieFinanzchecker" class="h-10 w-auto logo-hell" />
+          </a>
+          <p class="font-body text-sm text-white/70 leading-relaxed">
+            Hinter diesem Angebot steht das gesamte Team von DieFinanzchecker: dieselben Ansprechpartner, dieselbe Qualität, dieselbe Adresse. Spezialisiert auf Arbeitgeber.
+          </p>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          {agentur.stats.map((st) => (
+            <div>
+              <p class="font-display text-3xl text-white leading-none">{st.value}</p>
+              <p class="font-body text-xs text-white/55 mt-2 leading-snug">{st.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
 
-    <div class="grid sm:grid-cols-2 gap-8">
+    <div class="grid sm:grid-cols-2 gap-6">
       {gruender.map((g) => (
-        <div class="scroll-fade-in bg-background rounded-2xl border border-border p-6 md:p-8 flex flex-col items-center text-center gap-4">
+        <div class="scroll-fade-in glass-card p-6 md:p-8 flex flex-col items-center text-center gap-4">
           {fotos[g.foto ?? ''] ? (
             <img
               src={fotos[g.foto as string]}
               alt={`${g.vorname} ${g.nachname}, ${g.rolle} DieFinanzchecker GmbH`}
-              class="h-20 w-20 rounded-full object-cover object-top shadow-md"
+              class="h-24 w-24 rounded-full object-cover object-top ring-2 ring-[#3DADFF]/50 shadow-[0_0_30px_-4px_rgba(61,173,255,0.7)]"
             />
           ) : (
             <div class="h-20 w-20 rounded-full brand-gradient flex items-center justify-center text-white font-display text-xl shadow-md">
@@ -59,14 +83,14 @@ const initialen = (vorname: string, nachname: string) => `${vorname[0]}${nachnam
 
           <span class="pill-label !mb-0 !py-1.5 !px-3 !text-[11px]">{g.qualifikation}</span>
 
-          <p class="font-body text-sm text-muted-foreground/80 leading-relaxed">
+          <p class="font-body text-sm text-white/65 leading-relaxed">
             {g.bio}
           </p>
         </div>
       ))}
     </div>
 
-    <div class="scroll-fade-in mt-12 rounded-2xl overflow-hidden shadow-lg">
+    <div class="scroll-fade-in mt-6 rounded-[1.25rem] overflow-hidden border border-white/10">
       <img
         src={teamFoto.src}
         alt="Das Team der DieFinanzchecker GmbH"

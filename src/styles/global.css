@@ -38,32 +38,34 @@ html {
    (Design-Tokens DFC — DieFinanzchecker GmbH)
    =========================== */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 120 6% 6%;
-  --card: 0 0% 95%;
-  --card-foreground: 120 6% 6%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 120 6% 6%;
+  /* Dunkles Grundthema (Redesign Nov. 2026): Farben 1:1 von diefinanzchecker.de,
+     Hintergrund = DFC-Schwarz #0F110C, Blau als Leuchtfarbe, Orange sparsam. */
+  --background: 80 17% 6%;
+  --foreground: 0 0% 100%;
+  --card: 80 9% 10%;
+  --card-foreground: 0 0% 100%;
+  --popover: 80 9% 10%;
+  --popover-foreground: 0 0% 100%;
   --primary: 232 100% 61%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 0 0% 95%;
-  --secondary-foreground: 120 6% 6%;
-  --muted: 0 0% 95%;
-  --muted-foreground: 0 0% 40%;
+  --secondary: 80 7% 13%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 80 7% 13%;
+  --muted-foreground: 80 4% 70%;
   --accent: 20 89% 55%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 72% 51%;
-  --border: 0 0% 88%;
-  --input: 0 0% 88%;
+  --border: 80 6% 18%;
+  --input: 80 6% 22%;
   --ring: 232 100% 61%;
-  --radius: 0.75rem;
-  --surface: 0 0% 95%;
-  --surface-2: 0 0% 92%;
+  --radius: 1.25rem;
+  --surface: 80 12% 8%;
+  --surface-2: 80 9% 10%;
   --gold: 36 55% 58%;
   --gold-dark: 36 55% 32%;
   --teal: 232 100% 61%;
   --warn: 20 89% 55%;
-  --dark-bg: 120 6% 6%;
+  --dark-bg: 80 17% 6%;
 
   /* DFC Brand Colors (direkter Zugriff ohne HSL-Konvertierung) */
   --color-dark: #0F110C;
@@ -365,10 +367,11 @@ details.faq-item > .faq-content > div {
 .pill-label {
   display: inline-block;
   border-radius: 9999px;
-  background-color: hsl(var(--primary) / 0.1);
-  color: hsl(var(--primary));
-  padding: 0.5rem 1.25rem;
-  font-size: 0.875rem;
+  background-color: rgba(61, 80, 255, 0.14);
+  border: 1px solid rgba(61, 173, 255, 0.25);
+  color: #3DADFF;
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.2em;
@@ -418,11 +421,10 @@ section.relative .pill-label {
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
-  background-color: hsl(var(--background));
-  border: 1px solid hsl(var(--border));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: var(--radius-lg);
   padding: 1.75rem;
-  box-shadow: 0 2px 14px -6px rgba(0, 0, 0, 0.08);
 }
 .benefit-card .benefit-icon {
   display: inline-flex;
@@ -432,8 +434,8 @@ section.relative .pill-label {
   height: 2.75rem;
   flex-shrink: 0;
   border-radius: var(--radius-md);
-  background-color: hsl(var(--primary) / 0.1);
-  color: hsl(var(--primary));
+  background-color: rgba(61, 80, 255, 0.16);
+  color: #3DADFF;
 }
 .benefit-card h3 {
   font-family: "Inter", sans-serif;
@@ -484,3 +486,119 @@ section.relative .pill-label {
   font-weight: 700;
   letter-spacing: -0.01em;
 }
+
+
+/* ===========================
+   Redesign Nov. 2026: dunkles Thema im Stil moderner SaaS-Seiten
+   (Lichtflecken, Glas-Karten, leuchtende Buttons, nummerierte Abschnitte)
+   =========================== */
+html { background-color: #0F110C; color-scheme: dark; }
+
+/* Abschnitt mit weichem Lichtfleck im Hintergrund. Farbe/Position per Modifier. */
+.glow-section {
+  position: relative;
+  isolation: isolate;
+  /* nur seitlich beschneiden, damit der Lichtfleck oben/unten weich ausläuft */
+  overflow-x: clip;
+}
+.glow-section::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(900px, 120vw);
+  aspect-ratio: 1;
+  left: 50%;
+  top: -260px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle closest-side, rgba(61, 80, 255, 0.3), rgba(61, 80, 255, 0));
+  pointer-events: none;
+}
+.glow-section.glow-left::before { left: 10%; top: 10%; }
+.glow-section.glow-right::before { left: 90%; top: 20%; }
+.glow-section.glow-orange::before {
+  background: radial-gradient(circle closest-side, rgba(242, 99, 39, 0.16), rgba(242, 99, 39, 0));
+}
+.glow-section.glow-bottom::before { top: auto; bottom: -420px; }
+
+/* Glas-Karte */
+.glass-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+}
+
+/* Buttons */
+.btn-primary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.9rem 1.75rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.btn-primary {
+  background-image: linear-gradient(to right, #3D50FF, #3DADFF);
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14) inset, 0 0 32px -4px rgba(61, 110, 255, 0.75);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2) inset, 0 0 44px -2px rgba(61, 140, 255, 0.95);
+}
+.btn-ghost {
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+.btn-ghost:hover { background-color: rgba(255, 255, 255, 0.12); transform: translateY(-2px); }
+
+/* Große Abschnittsnummer (01, 02 …) */
+.section-num {
+  font-family: "Anton", sans-serif;
+  font-size: 2.25rem;
+  line-height: 1;
+  color: rgba(61, 173, 255, 0.35);
+}
+
+/* Abschnittsüberschrift: Akzentwort in Hellblau */
+.akzent { color: #3DADFF; }
+.akzent-orange { color: #F26327; }
+
+/* Schieberegler des Förderrechners */
+.regler {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, #3D50FF 0%, #3DADFF var(--fuell, 50%), rgba(255, 255, 255, 0.14) var(--fuell, 50%));
+  outline: none;
+  cursor: pointer;
+}
+.regler::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid #3DADFF;
+  box-shadow: 0 0 16px rgba(61, 173, 255, 0.8);
+}
+.regler::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid #3DADFF;
+  box-shadow: 0 0 16px rgba(61, 173, 255, 0.8);
+}
+.regler:focus-visible { box-shadow: 0 0 0 4px rgba(61, 173, 255, 0.3); }
+
+/* DFC-Logo (dunkle SVG) auf dunklem Grund weiß darstellen */
+.logo-hell { filter: brightness(0) invert(1); opacity: 0.9; }

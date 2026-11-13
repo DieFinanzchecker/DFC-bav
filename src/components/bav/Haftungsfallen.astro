@@ -1,0 +1,71 @@
+---
+// Typische Haftungsrisiken für Arbeitgeber bei der bAV, jeweils mit unserer Lösung.
+import Icon from './Icon.astro';
+
+const fallen = [
+  {
+    titel: 'Fehlender Arbeitgeberzuschuss bei Altverträgen',
+    risiko: 'Seit 2022 gilt die Zuschusspflicht von 15 % auch für Entgeltumwandlungen, die vor 2019 vereinbart wurden. Wurde das übersehen, drohen Nachzahlungen.',
+    loesung: 'Wir prüfen alle bestehenden Verträge und zeigen, wo nachgebessert werden muss.',
+  },
+  {
+    titel: 'Keine Versorgungsordnung',
+    risiko: 'Ohne feste Regeln entscheiden Sie jeden Fall einzeln. Das führt schnell zu Ungleichbehandlung und zu Ansprüchen, die Sie so nie zusagen wollten.',
+    loesung: 'Eine klare Versorgungsordnung legt fest, wer was zu welchen Bedingungen bekommt.',
+  },
+  {
+    titel: 'Einstandspflicht des Arbeitgebers',
+    risiko: 'Sie als Arbeitgeber stehen für die zugesagte Leistung ein, auch wenn der Versorgungsträger sie später nicht in voller Höhe erbringt.',
+    loesung: 'Wir achten bei Zusageart und Anbieterauswahl darauf, dieses Risiko so klein wie möglich zu halten.',
+  },
+  {
+    titel: 'Beratung nicht dokumentiert',
+    risiko: 'Wer Mitarbeitende zur bAV informiert, muss das richtig und vollständig tun. Ohne Nachweis lässt sich später nicht belegen, worüber aufgeklärt wurde.',
+    loesung: 'Wir beraten jeden Mitarbeitenden persönlich und dokumentieren das Gespräch, auch wenn jemand verzichtet.',
+  },
+];
+---
+
+<section id="haftung" class="glow-section glow-orange glow-right px-4 py-20 md:py-28 scroll-mt-24">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+      <span class="pill-label">Rechtssicherheit</span>
+      <h2 class="font-display text-fluid-h2 text-white mb-4">
+        Vier Haftungsfallen, die Arbeitgeber <span class="akzent-orange">teuer</span> zu stehen kommen
+      </h2>
+      <p class="font-body text-fluid-body text-white/65">
+        Bei der bAV haften Sie als Arbeitgeber. Die meisten Risiken entstehen nicht durch böse Absicht, sondern weil niemand genau hingeschaut hat.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      {fallen.map((f, i) => (
+        <div class="glass-card scroll-fade-in p-6 md:p-8 flex flex-col gap-4">
+          <div class="flex items-start gap-4">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#F26327]/15 text-[#F26327]">
+              <Icon name="alert-triangle" class="h-5 w-5" />
+            </span>
+            <div>
+              <p class="font-body text-xs font-semibold uppercase tracking-[0.18em] text-white/40 mb-1">Risiko {String(i + 1).padStart(2, '0')}</p>
+              <h3 class="b2b-heading text-lg text-white">{f.titel}</h3>
+            </div>
+          </div>
+          <p class="font-body text-sm text-white/65 leading-relaxed">{f.risiko}</p>
+          <div class="mt-auto flex items-start gap-3 rounded-2xl bg-[#3D50FF]/12 border border-[#3DADFF]/20 p-4">
+            <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#3D50FF]/30 text-[#3DADFF]">
+              <Icon name="check" class="h-3 w-3" />
+            </span>
+            <p class="font-body text-sm text-white/90 leading-relaxed"><span class="font-semibold">So lösen wir es:</span> {f.loesung}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="#kontakt" class="btn-primary">
+        Bestehende bAV kostenlos prüfen lassen
+        <Icon name="arrow-right" class="h-4 w-4" />
+      </a>
+    </div>
+  </div>
+</section>

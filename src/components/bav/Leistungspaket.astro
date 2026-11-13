@@ -1,0 +1,43 @@
+---
+// Was konkret im Service enthalten ist.
+import Icon from './Icon.astro';
+
+const leistungen = [
+  { icon: 'file-search', titel: 'Bestandsaufnahme', text: 'Wir prüfen bestehende Verträge, Zusagen und Zuschüsse und zeigen Ihnen, wo Ihr Unternehmen heute steht.' },
+  { icon: 'scale', titel: 'Versorgungsordnung', text: 'Sie erhalten klare, einheitliche Regeln für Ihre bAV: wer Anspruch hat, wie hoch der Zuschuss ist und wie der Ablauf aussieht.' },
+  { icon: 'layers', titel: 'Anbieterauswahl', text: 'Mit breitem Marktüberblick wählen wir Durchführungsweg und Anbieter, die zu Ihrem Unternehmen passen.' },
+  { icon: 'users', titel: 'Beratung Ihrer Mitarbeitenden', text: 'Jeder Mitarbeitende bekommt ein persönliches Gespräch, verständlich erklärt und sauber dokumentiert.' },
+  { icon: 'clipboard', titel: 'Einrichtung in der Lohnabrechnung', text: 'Wir stimmen uns direkt mit Ihrer Lohnbuchhaltung oder Ihrem Steuerbüro ab, damit die Abrechnung von Anfang an stimmt.' },
+  { icon: 'handshake', titel: 'Laufende Betreuung', text: 'Neueinstellungen, Austritte, Elternzeit, Gehaltsänderungen: Wir kümmern uns, Sie haben einen festen Ansprechpartner.' },
+];
+---
+
+<section id="leistungen" class="px-4 py-20 md:py-28 scroll-mt-24 bg-white/[0.02] border-y border-white/8">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-16 items-start">
+    <div class="lg:sticky lg:top-32 text-center lg:text-left">
+      <span class="pill-label">Unser Service</span>
+      <h2 class="font-display text-fluid-h2 text-white mb-4">
+        Sie haben die bAV. Wir machen <span class="akzent">den Rest.</span>
+      </h2>
+      <p class="font-body text-fluid-body text-white/65 mb-8">
+        Ein Ansprechpartner für alles, von der ersten Analyse bis zur laufenden Betreuung. Ihre HR-Abteilung wird entlastet statt zusätzlich beschäftigt.
+      </p>
+      <a href="#kontakt" class="btn-ghost">Erstgespräch vereinbaren</a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-5">
+      {leistungen.map((l, i) => (
+        <div class="glass-card card-hover scroll-fade-in p-6 flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#3D50FF]/20 text-[#3DADFF]">
+              <Icon name={l.icon} class="h-5 w-5" />
+            </span>
+            <span class="section-num !text-2xl">{String(i + 1).padStart(2, '0')}</span>
+          </div>
+          <h3 class="b2b-heading text-base text-white">{l.titel}</h3>
+          <p class="font-body text-sm text-white/65 leading-relaxed">{l.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

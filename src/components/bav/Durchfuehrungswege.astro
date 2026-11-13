@@ -1,0 +1,37 @@
+---
+// Die fünf Durchführungswege der bAV im Überblick, bewusst kurz gehalten.
+const wege = [
+  { name: 'Direktversicherung', passt: 'Der häufigste Weg im Mittelstand', text: 'Einfach einzurichten, kaum Verwaltungsaufwand, keine Auswirkung auf Ihre Bilanz.', beliebt: true },
+  { name: 'Pensionskasse', passt: 'Ähnlich der Direktversicherung', text: 'Eigenständige Versorgungseinrichtung, oft branchen- oder konzernbezogen.' },
+  { name: 'Pensionsfonds', passt: 'Für chancenorientierte Anlage', text: 'Freiere Kapitalanlage und damit höhere Renditechancen bei etwas mehr Schwankung.' },
+  { name: 'Unterstützungskasse', passt: 'Für höhere Beiträge', text: 'Beiträge über die üblichen Grenzen hinaus möglich, etwa für Führungskräfte.' },
+  { name: 'Direktzusage', passt: 'Für Geschäftsführer und Inhaber', text: 'Das Unternehmen sagt die Versorgung selbst zu. Flexibel, aber mit Auswirkung auf die Bilanz.' },
+];
+---
+
+<section id="durchfuehrungswege" class="px-4 py-20 md:py-28 scroll-mt-24">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+      <span class="pill-label">Durchführungswege</span>
+      <h2 class="font-display text-fluid-h2 text-white mb-4">
+        Fünf Wege zur bAV. Wir finden den, <span class="akzent">der passt.</span>
+      </h2>
+      <p class="font-body text-fluid-body text-white/65">
+        Nicht jede Mitarbeitergruppe braucht dieselbe Lösung. Welcher Weg für wen sinnvoll ist, klären wir gemeinsam.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      {wege.map((w) => (
+        <div class:list={['glass-card card-hover scroll-fade-in p-5 flex flex-col gap-3', w.beliebt && '!border-[#3DADFF]/45 shadow-[0_0_50px_-20px_rgba(61,173,255,0.9)]']}>
+          {w.beliebt && (
+            <span class="self-start rounded-full bg-[#3D50FF]/25 px-2.5 py-1 font-body text-[10px] font-semibold uppercase tracking-wider text-[#3DADFF]">Am häufigsten</span>
+          )}
+          <h3 class="b2b-heading text-base text-white">{w.name}</h3>
+          <p class="font-body text-xs font-semibold text-[#3DADFF]">{w.passt}</p>
+          <p class="font-body text-sm text-white/65 leading-relaxed">{w.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

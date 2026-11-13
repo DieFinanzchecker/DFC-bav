@@ -1,47 +1,51 @@
 ---
-import GoogleTrustBadge from '../empfehlung/GoogleTrustBadge.astro';
+import Icon from './Icon.astro';
+import googleTrust from '../../data/google-trust.json';
 import martinFoto from '../../assets/images/gruender/martin.avif';
 import jannisFoto from '../../assets/images/gruender/jannis.avif';
+
+const haken = [
+  'Mitarbeitende binden und neue Fachkräfte gewinnen',
+  'Rechtsansprüche Ihrer Mitarbeitenden sauber erfüllen',
+  'Haftungsrisiken für Ihr Unternehmen minimieren',
+];
 ---
 
-<section class="section-bg px-4 pt-10 pb-16 md:pt-16 md:pb-24">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-10 items-center">
+<section class="glow-section px-4 pt-32 pb-16 md:pt-40 md:pb-24">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-14 items-center">
 
-    <!-- Linke Spalte: Headline, Subheadline, CTAs, Trust-Strip -->
-    <div class="text-center md:text-left">
-      <span class="pill-label">Für Arbeitgeber &amp; HR</span>
-      <h1 class="font-display text-fluid-hero text-foreground mb-5">
-        Betriebliche Altersvorsorge,<br class="hidden md:block" /> die Ihrem Unternehmen wirklich nützt.
+    <div class="text-center lg:text-left">
+      <span class="pill-label">Für Arbeitgeber, Geschäftsführung &amp; HR</span>
+      <h1 class="font-display text-fluid-hero text-white mb-6">
+        Betriebliche Altersvorsorge, die sich für Ihr Unternehmen <span class="brand-gradient-text">rechnet.</span>
       </h1>
-      <p class="font-body text-fluid-body text-muted-foreground max-w-xl mx-auto md:mx-0 mb-8">
-        Wir übernehmen für Sie Analyse, Konzept, Anbieterauswahl und laufende Betreuung — damit Ihre bAV Mitarbeitende bindet, Kosten spart und Ihre HR-Abteilung entlastet, statt sie zu beschäftigen.
+      <p class="font-body text-fluid-body text-white/70 max-w-xl mx-auto lg:mx-0 mb-7">
+        Wir versorgen Ihr gesamtes Unternehmen mit einer sauberen bAV: von der Versorgungsordnung über die Beratung Ihrer Mitarbeitenden bis zur laufenden Betreuung. Ohne Mehraufwand für Ihre HR-Abteilung.
       </p>
 
-      <div class="flex flex-col sm:flex-row items-center gap-4 mb-8 justify-center md:justify-start">
-        <a
-          href="#kontakt"
-          class="cta-hover shimmer inline-flex items-center justify-center gap-2 rounded-full font-body font-semibold text-base px-7 py-3.5 brand-gradient text-white shadow-lg shadow-primary/25 transition-all duration-300 w-full sm:w-auto"
-        >
-          Kostenloses Erstgespräch sichern
-        </a>
-        <a
-          href="https://calendly.com/diefinanzchecker/kennenlerntermin"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="cta-hover inline-flex items-center justify-center gap-2 rounded-full font-body font-semibold text-base px-7 py-3.5 border border-border text-foreground hover:bg-secondary transition-all duration-300 w-full sm:w-auto"
-        >
-          Termin direkt per Calendly buchen
-        </a>
-      </div>
+      <ul class="flex flex-col gap-2.5 mb-9 max-w-xl mx-auto lg:mx-0 text-left">
+        {haken.map((h) => (
+          <li class="flex items-start gap-3 font-body text-sm md:text-base text-white/85">
+            <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#3D50FF]/25 text-[#3DADFF]">
+              <Icon name="check" class="h-3 w-3" />
+            </span>
+            {h}
+          </li>
+        ))}
+      </ul>
 
-      <div class="flex justify-center md:justify-start">
-        <GoogleTrustBadge variant="compact" />
+      <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+        <a href="#kontakt" class="btn-primary w-full sm:w-auto sm:whitespace-nowrap">
+          Kostenloses Erstgespräch sichern
+          <Icon name="arrow-right" class="h-4 w-4" />
+        </a>
+        <a href="#rechner" class="btn-ghost w-full sm:w-auto sm:whitespace-nowrap">Förderung berechnen</a>
       </div>
     </div>
 
-    <!-- Rechte Spalte: großformatiges Doppelporträt Martin & Jannis -->
+    <!-- Rechte Spalte: Gründer-Doppelporträt als Glas-Karte -->
     <div class="scroll-fade-in">
-      <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-border/40 max-w-md mx-auto">
+      <div class="glass-card overflow-hidden max-w-md mx-auto shadow-[0_0_80px_-20px_rgba(61,80,255,0.6)]">
         <div class="grid grid-cols-2">
           <img
             src={martinFoto.src}
@@ -54,13 +58,53 @@ import jannisFoto from '../../assets/images/gruender/jannis.avif';
             class="w-full aspect-[3/4] object-cover object-top"
           />
         </div>
-        <div class="bg-background px-5 py-4 text-center">
-          <p class="font-body font-semibold text-foreground">Martin Schmidt &amp; Jannis Oberhaus</p>
-          <p class="font-body text-sm text-muted-foreground mt-1">Geschäftsführer, DieFinanzchecker GmbH</p>
+        <div class="px-5 py-4 text-center">
+          <p class="font-body font-semibold text-white">Martin Schmidt &amp; Jannis Oberhaus</p>
+          <p class="font-body text-sm text-white/60 mt-1">Ihre Ansprechpartner für die bAV in Ihrem Unternehmen</p>
         </div>
       </div>
     </div>
+  </div>
 
+  <!-- Vertrauensleiste -->
+  <div class="max-w-6xl mx-auto mt-14 md:mt-20 grid sm:grid-cols-3 gap-4">
+    <div class="glass-card flex items-center gap-4 px-5 py-4">
+      <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#3D50FF]/20 text-[#3DADFF]">
+        <Icon name="stamp" class="h-5 w-5" />
+      </span>
+      <p class="font-body text-sm text-white/85 leading-snug">
+        <span class="font-semibold text-white">Zertifizierte Experten</span><br />
+        für betriebliche Altersversorgung (DVA)
+      </p>
+    </div>
+    <a
+      href={googleTrust.source_url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="glass-card flex items-center gap-4 px-5 py-4 hover:border-white/25 transition-colors"
+    >
+      <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+      </span>
+      <p class="font-body text-sm text-white/85 leading-snug">
+        <span class="font-semibold text-white">5,0 von 5 Sternen</span><br />
+        aus über {googleTrust.review_count} Google-Bewertungen
+      </p>
+    </a>
+    <div class="glass-card flex items-center gap-4 px-5 py-4">
+      <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#3D50FF]/20 text-[#3DADFF]">
+        <Icon name="handshake" class="h-5 w-5" />
+      </span>
+      <p class="font-body text-sm text-white/85 leading-snug">
+        <span class="font-semibold text-white">15+ Jahre Erfahrung</span><br />
+        in der Beratung von Unternehmen und Mitarbeitenden
+      </p>
+    </div>
   </div>
 </section>
 

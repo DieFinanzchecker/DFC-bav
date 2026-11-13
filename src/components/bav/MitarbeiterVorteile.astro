@@ -12,18 +12,18 @@ const items = vorteile as Vorteil[];
 // Drei Akzentfarben aus der Markenpalette, abwechselnd pro Karte — sorgt für
 // spürbar mehr Farbe/Highlights in diesem sonst sehr zurückhaltenden Abschnitt.
 const akzente = [
-  { bg: 'rgba(61,80,255,0.1)', color: '#3D50FF' }, // Markenblau
-  { bg: 'rgba(242,99,39,0.1)', color: '#F26327' }, // Orange
-  { bg: 'rgba(61,173,255,0.12)', color: '#3DADFF' }, // Hellblau
+  { bg: 'rgba(61,80,255,0.2)', color: '#7B8BFF' }, // Markenblau
+  { bg: 'rgba(242,99,39,0.16)', color: '#F26327' }, // Orange
+  { bg: 'rgba(61,173,255,0.16)', color: '#3DADFF' }, // Hellblau
 ];
 ---
 
-<section class="px-4 py-16 md:py-20" style="background: linear-gradient(135deg, rgba(61,80,255,0.05), rgba(242,99,39,0.04));">
-  <div class="max-w-4xl mx-auto">
-    <div class="text-center max-w-xl mx-auto mb-10">
+<section class="px-4 py-20 md:py-28">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12">
       <span class="pill-label">Vorteile für Ihr Team</span>
-      <h2 class="b2b-heading text-xl md:text-2xl text-foreground mb-2">Das kommt bei Ihrem Team an</h2>
-      <p class="font-body text-sm text-muted-foreground">
+      <h2 class="font-display text-fluid-h2 text-white mb-4">Das kommt bei Ihrem <span class="akzent">Team</span> an</h2>
+      <p class="font-body text-fluid-body text-white/65">
         Auch Ihre Mitarbeitenden profitieren spürbar — ein zusätzliches Argument für die Einführung.
       </p>
     </div>

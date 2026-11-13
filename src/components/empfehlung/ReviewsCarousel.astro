@@ -30,10 +30,10 @@ const looped = [...filtered, ...filtered];
 ---
 
 {filtered.length > 0 && (
-<section class="section-surface py-16 md:py-20 px-4">
+<section class="py-20 md:py-28 px-4 bg-white/[0.02] border-y border-white/8">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-10 max-w-2xl mx-auto">
-      <h2 class="font-display text-fluid-h2 font-semibold text-foreground mb-3">Was andere sagen.</h2>
+      <h2 class="font-display text-fluid-h2 font-semibold text-foreground mb-3">Was andere <span class="akzent">sagen</span></h2>
       <p class="font-body text-base text-muted-foreground leading-relaxed">
         Verifizierte Bewertung aus unserem Google-Profil.
       </p>
@@ -49,7 +49,7 @@ const looped = [...filtered, ...filtered];
       <div class="reviews-mask">
         <ul class="reviews-track" role="list">
           {looped.map((r, i) => (
-            <li class="review-card shrink-0 rounded-lg border border-border bg-card p-6 flex flex-col" aria-hidden={i >= filtered.length ? 'true' : undefined}>
+            <li class="review-card shrink-0 glass-card p-6 flex flex-col" aria-hidden={i >= filtered.length ? 'true' : undefined}>
               <div class="flex gap-0.5 mb-3" aria-label={`${r.sterne} von 5 Sternen`}>
                 {Array.from({ length: 5 }).map((_, j) => (
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class:list={['h-4 w-4', j < r.sterne ? 'text-amber-400' : 'text-muted-foreground/30']} aria-hidden="true">

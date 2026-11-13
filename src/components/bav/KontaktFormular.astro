@@ -2,11 +2,11 @@
 import Icon from './Icon.astro';
 ---
 
-<section id="kontakt" class="section-bg px-4 py-16 md:py-24 scroll-mt-24">
+<section id="kontakt" class="glow-section glow-left px-4 py-20 md:py-28 scroll-mt-24">
   <div class="max-w-5xl mx-auto">
     <div class="text-center max-w-2xl mx-auto mb-12">
       <span class="pill-label">Kontakt</span>
-      <h2 class="font-display text-fluid-h2 text-foreground mb-4">Lassen Sie uns sprechen</h2>
+      <h2 class="font-display text-fluid-h2 text-foreground mb-4">Lassen Sie uns <span class="akzent">sprechen</span></h2>
       <p class="font-body text-fluid-body text-muted-foreground">
         Schildern Sie uns kurz Ihre Situation — wir melden uns zeitnah für ein kostenloses Erstgespräch.
       </p>
@@ -15,7 +15,7 @@ import Icon from './Icon.astro';
     <div class="grid lg:grid-cols-[1.4fr_1fr] gap-8 items-start">
 
       <!-- Kontaktformular: reine Frontend-Validierung, kein echter Versand-Handler -->
-      <div class="scroll-fade-in bg-background rounded-2xl border border-border p-6 md:p-8 shadow-sm">
+      <div class="scroll-fade-in glass-card p-6 md:p-8">
         <!-- TODO_DFC: Versand-Backend (Make.com-Webhook oder E-Mail) noch offen, siehe Projektplan -->
         <form class="grid sm:grid-cols-2 gap-5">
           <div class="sm:col-span-1">
@@ -25,7 +25,7 @@ import Icon from './Icon.astro';
               name="firmenname"
               type="text"
               required
-              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
+              class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
             />
           </div>
 
@@ -36,7 +36,7 @@ import Icon from './Icon.astro';
               name="ansprechpartner"
               type="text"
               required
-              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
+              class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
             />
           </div>
 
@@ -46,7 +46,7 @@ import Icon from './Icon.astro';
               id="mitarbeiterzahl"
               name="mitarbeiterzahl"
               required
-              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
+              class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
             >
               <option value="" selected disabled>Bitte wählen</option>
               <option value="1-9">1–9</option>
@@ -63,7 +63,7 @@ import Icon from './Icon.astro';
               name="email"
               type="email"
               required
-              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
+              class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
             />
           </div>
 
@@ -73,7 +73,7 @@ import Icon from './Icon.astro';
               id="telefon"
               name="telefon"
               type="tel"
-              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
+              class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
             />
           </div>
 
@@ -83,7 +83,7 @@ import Icon from './Icon.astro';
               id="nachricht"
               name="nachricht"
               rows="4"
-              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors resize-y"
+              class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors resize-y"
             ></textarea>
           </div>
 
@@ -103,7 +103,7 @@ import Icon from './Icon.astro';
           <div class="sm:col-span-2">
             <button
               type="submit"
-              class="cta-hover shimmer inline-flex items-center justify-center gap-2 rounded-full font-body font-semibold text-base px-7 py-3.5 brand-gradient text-white shadow-lg shadow-primary/25 transition-all duration-300 w-full sm:w-auto"
+              class="btn-primary w-full sm:w-auto"
             >
               Anfrage absenden
             </button>
@@ -112,7 +112,7 @@ import Icon from './Icon.astro';
       </div>
 
       <!-- Gleichwertige Alternative: direkt einen Termin buchen -->
-      <div class="scroll-fade-in bg-[hsl(var(--dark-bg))] text-white rounded-2xl p-6 md:p-8 flex flex-col gap-4 h-full">
+      <div class="scroll-fade-in glass-card text-white p-6 md:p-8 flex flex-col gap-4 h-full" style="background: linear-gradient(160deg, rgba(61,80,255,0.3), rgba(61,173,255,0.06));">
         <div class="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-white/10 text-white">
           <Icon name="calendar" class="h-5 w-5" />
         </div>
