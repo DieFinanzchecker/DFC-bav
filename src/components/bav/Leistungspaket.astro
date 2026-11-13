@@ -1,6 +1,8 @@
 ---
 // Was konkret im Service enthalten ist.
+import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
+import beratungFoto from '../../assets/images/stock/beratung-meeting.jpg';
 
 const leistungen = [
   { icon: 'file-search', titel: 'Bestandsaufnahme', text: 'Wir prüfen bestehende Verträge, Zusagen und Zuschüsse und zeigen Ihnen, wo Ihr Unternehmen heute steht.' },
@@ -23,6 +25,15 @@ const leistungen = [
         Ein Ansprechpartner für alles, von der ersten Analyse bis zur laufenden Betreuung. Ihre HR-Abteilung wird entlastet statt zusätzlich beschäftigt.
       </p>
       <a href="#kontakt" class="btn-ghost">Erstgespräch vereinbaren</a>
+      <div class="scroll-fade-in mt-10 rounded-[1.25rem] overflow-hidden border border-white/10 shadow-[0_0_70px_-25px_rgba(61,110,255,0.8)]">
+        <Image
+          src={beratungFoto}
+          alt="Beratungsgespräch am Konferenztisch"
+          widths={[480, 800, 1200]}
+          sizes="(min-width: 1024px) 420px, 100vw"
+          class="w-full aspect-[4/3] object-cover"
+        />
+      </div>
     </div>
 
     <div class="grid sm:grid-cols-2 gap-5">

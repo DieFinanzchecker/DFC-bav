@@ -9,7 +9,7 @@ const zahlen = [
   { wert: `${Math.round(werte.pflichtzuschuss * 100)} %`, text: 'gesetzlicher Pflichtzuschuss bei Entgeltumwandlung' },
   { wert: `ca. ${quote} %`, text: 'sparen Sie als Arbeitgeber an Sozialabgaben auf den umgewandelten Betrag' },
   { wert: `${maxUmwandlung} €`, text: `pro Monat steuer- und sozialabgabenfrei umwandelbar (${werte.stand})` },
-  { wert: '0 €', text: 'kostet Sie unsere Erstanalyse Ihrer bestehenden bAV' },
+  { wert: '0 €', text: 'kostet Sie unsere Erstanalyse Ihrer bestehenden bAV', orange: true },
 ];
 ---
 
@@ -17,7 +17,7 @@ const zahlen = [
   <div class="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
     {zahlen.map((z) => (
       <div class="scroll-fade-in text-center">
-        <p class="font-display text-4xl md:text-5xl brand-gradient-text leading-none">{z.wert}</p>
+        <p class:list={['font-display text-4xl md:text-5xl leading-none', z.orange ? 'akzent-orange' : 'brand-gradient-text']}>{z.wert}</p>
         <p class="font-body text-sm text-white/65 mt-3 max-w-[15rem] mx-auto leading-snug">{z.text}</p>
       </div>
     ))}

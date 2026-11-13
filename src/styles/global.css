@@ -602,3 +602,10 @@ html { background-color: #0F110C; color-scheme: dark; }
 
 /* DFC-Logo (dunkle SVG) auf dunklem Grund weiß darstellen */
 .logo-hell { filter: brightness(0) invert(1); opacity: 0.9; }
+
+/* Orange Variante des Pill-Labels (für Warn-/Risiko-Abschnitte) */
+.pill-label.pill-orange {
+  background-color: rgba(242, 99, 39, 0.12);
+  border-color: rgba(242, 99, 39, 0.35);
+  color: #F26327;
+}

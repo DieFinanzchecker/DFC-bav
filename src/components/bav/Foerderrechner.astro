@@ -7,7 +7,7 @@ import werte from '../../data/rechenwerte.json';
 import { maxUmwandlung } from '../../lib/rechner';
 
 const regler = [
-  { id: 'mitarbeitende', label: 'Mitarbeitende mit bAV', min: 1, max: 250, step: 1, wert: 20, einheit: '' },
+  { id: 'mitarbeitende', label: 'Mitarbeitende mit bAV', min: 1, max: 500, step: 1, wert: 20, einheit: '' },
   { id: 'gehalt', label: 'Ø Bruttogehalt pro Monat', min: 2000, max: 10000, step: 100, wert: 3500, einheit: '€' },
   { id: 'umwandlung', label: 'Ø Entgeltumwandlung pro Monat', min: 25, max: maxUmwandlung, step: 1, wert: 150, einheit: '€' },
   { id: 'zuschussProzent', label: 'Ihr Arbeitgeberzuschuss', min: 0, max: 50, step: 1, wert: 15, einheit: '%' },
@@ -64,7 +64,7 @@ const euro = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2
             )}
             {r.id === 'umwandlung' && (
               <p class="font-body text-xs text-white/45 mt-3">
-                Bis {maxUmwandlung} € pro Monat steuer- und sozialabgabenfrei (4 % der Beitragsbemessungsgrenze {werte.stand}).
+                Der Betrag, den ein Mitarbeitender im Schnitt aus seinem Bruttogehalt in die bAV umwandeln möchte. Bis {maxUmwandlung} € pro Monat steuer- und sozialabgabenfrei (4 % der Beitragsbemessungsgrenze {werte.stand}).
               </p>
             )}
           </div>
@@ -74,7 +74,7 @@ const euro = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2
       <!-- Ergebnis -->
       <div class="glass-card p-6 md:p-9 flex flex-col shadow-[0_0_90px_-30px_rgba(61,110,255,0.8)]" aria-live="polite">
         <p class="font-body text-xs font-semibold uppercase tracking-[0.2em] text-[#3DADFF] mb-3">Ihr Ergebnis pro Jahr</p>
-        <p class="font-display text-5xl md:text-6xl leading-none text-white" data-aus="hauptzahl">0 €</p>
+        <p class="font-display text-5xl md:text-6xl leading-none text-white" data-aus="hauptzahl">0 €*</p>
         <p class="font-body text-lg md:text-xl font-semibold text-white mt-3" data-aus="hauptzeile">Mehrkosten für Ihr Unternehmen</p>
         <p class="font-body text-sm text-white/65 mt-2 leading-relaxed" data-aus="erklaerung"></p>
 
@@ -110,7 +110,11 @@ const euro = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2
           </div>
         </div>
 
-        <a href="#kontakt" class="btn-primary mt-8 w-full">
+        <p class="font-body text-xs italic text-white/55 mt-8 leading-relaxed">
+          * Pauschalierte Beispielrechnung mit Durchschnittswerten. Die tatsächliche Ersparnis hängt von Ihrer Gehaltsstruktur ab und muss für Ihr Unternehmen individuell berechnet werden.
+        </p>
+
+        <a href="#kontakt" class="btn-primary mt-4 w-full">
           Mit meinen echten Zahlen durchrechnen lassen
           <Icon name="arrow-right" class="h-4 w-4" />
         </a>
@@ -154,8 +158,8 @@ const euro = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2
 
       const haupt = aus('hauptzahl');
       if (r.saldoJahr >= 0) {
-        haupt.textContent = '0 €';
-        haupt.style.color = '#3DADFF';
+        haupt.textContent = '0 €*';
+        haupt.style.color = '#F26327';
         aus('hauptzeile').textContent = 'Mehrkosten für Ihr Unternehmen';
         aus('erklaerung').textContent =
           w.zuschussProzent === 0
@@ -163,7 +167,7 @@ const euro = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2
             : `Ihr Zuschuss von ${w.zuschussProzent} % ist vollständig über die eingesparten Sozialabgaben finanziert. Es bleiben sogar ${euro(r.saldoJahr)} pro Jahr in Ihrem Unternehmen.`;
       } else {
         const gedeckt = Math.round((r.ersparnisJahr / r.zuschussJahr) * 100);
-        haupt.textContent = euro(-r.saldoJahr);
+        haupt.textContent = `${euro(-r.saldoJahr)}*`;
         haupt.style.color = '#ffffff';
         aus('hauptzeile').textContent = 'echter Aufwand für Ihr Unternehmen';
         aus('erklaerung').textContent =

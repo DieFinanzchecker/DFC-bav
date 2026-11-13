@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
+import teamFoto from '../../assets/images/stock/team-besprechung.jpg';
 import vorteile from '../../data/mitarbeiter-vorteile.json';
 
 interface Vorteil {
@@ -28,7 +30,19 @@ const akzente = [
       </p>
     </div>
 
-    <div class="grid sm:grid-cols-3 gap-5">
+    <div class="scroll-fade-in relative mb-6 rounded-[1.25rem] overflow-hidden border border-white/10">
+      <Image
+        src={teamFoto}
+        alt="Team bei einer lockeren Besprechung im Büro"
+        widths={[640, 1024, 1600]}
+        sizes="(min-width: 1152px) 1152px, 100vw"
+        class="w-full aspect-[16/9] md:aspect-[21/8] object-cover"
+        style="object-position: center 35%;"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0F110C] via-[#0F110C]/20 to-transparent" aria-hidden="true"></div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5">
       {items.map((v, i) => {
         const akzent = akzente[i % akzente.length];
         return (
