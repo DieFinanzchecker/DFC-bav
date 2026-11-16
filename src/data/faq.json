@@ -1,5 +1,9 @@
 [
   {
+    "frage": "Was ist der Unterschied zwischen bAV und Betriebsrente?",
+    "antwort": "Es gibt keinen. Betriebliche Altersvorsorge (bAV), betriebliche Altersversorgung und Betriebsrente meinen dasselbe: eine Altersvorsorge, die über den Arbeitgeber aufgebaut wird. Sie kann vom Mitarbeitenden per Entgeltumwandlung, vom Arbeitgeber (arbeitgeberfinanzierte bAV) oder von beiden gemeinsam finanziert werden."
+  },
+  {
     "frage": "Ist betriebliche Altersvorsorge für Arbeitgeber verpflichtend?",
     "antwort": "Eine eigene bAV-Regelung müssen Sie als Arbeitgeber nicht aus eigenem Antrieb einführen. Allerdings haben Ihre Mitarbeitenden einen gesetzlichen Anspruch darauf, einen Teil ihres Gehalts per Entgeltumwandlung in eine betriebliche Altersvorsorge einzubringen — verlangt ein Mitarbeitender das, sind Sie als Arbeitgeber verpflichtet, dies zu ermöglichen. Wir klären mit Ihnen, was das konkret für Ihr Unternehmen bedeutet."
   },
@@ -30,5 +34,13 @@
   {
     "frage": "Wie läuft die Erstberatung ab und was kostet sie uns?",
     "antwort": "Die Erstberatung ist für Sie kostenlos. Wir sprechen über Ihre Ausgangssituation, Ihre Mitarbeiterstruktur und Ihre Ziele und zeigen Ihnen erste Handlungsoptionen auf — Sie entscheiden danach in Ruhe, ob und wie Sie weitermachen möchten."
+  },
+  {
+    "frage": "Lohnt sich eine bAV auch für kleine und mittlere Unternehmen?",
+    "antwort": "Ja. Der Rechtsanspruch auf Entgeltumwandlung und die Zuschusspflicht gelten für jede Unternehmensgröße, also auch für Betriebe mit wenigen Mitarbeitenden. Gerade im Mittelstand ist eine gut gemachte Betriebsrente ein wirksamer Benefit, um Fachkräfte zu halten, und über die Direktversicherung bleibt der Verwaltungsaufwand gering."
+  },
+  {
+    "frage": "Gibt es eine staatliche Förderung für Arbeitgeber?",
+    "antwort": "Ja, den sogenannten bAV-Förderbetrag für Geringverdiener. Zahlen Sie als Arbeitgeber für Mitarbeitende mit geringem Einkommen einen zusätzlichen Beitrag in die bAV ein, erhalten Sie 30 % davon über die Lohnsteuer-Anmeldung zurück. Ob und für wen das in Ihrem Unternehmen infrage kommt, prüfen wir in der Erstanalyse."
   }
 ]

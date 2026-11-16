@@ -67,6 +67,10 @@ const initialen = (vorname: string, nachname: string) => `${vorname[0]}${nachnam
           {fotos[g.foto ?? ''] ? (
             <img
               src={fotos[g.foto as string]}
+              width="96"
+              height="96"
+              loading="lazy"
+              decoding="async"
               alt={`${g.vorname} ${g.nachname}, ${g.rolle} DieFinanzchecker GmbH`}
               class="h-24 w-24 rounded-full object-cover object-top ring-2 ring-[#3DADFF]/50 shadow-[0_0_30px_-4px_rgba(61,173,255,0.7)]"
             />
@@ -93,6 +97,10 @@ const initialen = (vorname: string, nachname: string) => `${vorname[0]}${nachnam
     <div class="scroll-fade-in mt-6 rounded-[1.25rem] overflow-hidden border border-white/10">
       <img
         src={teamFoto.src}
+        width={teamFoto.width}
+        height={teamFoto.height}
+        loading="lazy"
+        decoding="async"
         alt="Das Team der DieFinanzchecker GmbH"
         class="w-full aspect-[3/2] object-cover"
         style="object-position: center 30%;"

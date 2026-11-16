@@ -1,0 +1,26 @@
+---
+// Logo der Marke bAVhelden. Die Bilddateien werden aus dem Original erzeugt:
+// entwuerfe/logos/freistellen.cjs (Hintergrund entfernt, Variante für dunklen Grund).
+//  - variante "kopf": Figur + Schriftzug nebeneinander, für die schmale Kopfzeile
+//  - variante "voll": das komplette Logo (Figur über Schriftzug), für größere Flächen
+import { Image } from 'astro:assets';
+import figur from '../../assets/images/logo/bavhelden-figur-dunkel.png';
+import voll from '../../assets/images/logo/bavhelden-dunkel.png';
+
+interface Props {
+  variante?: 'kopf' | 'voll';
+  class?: string;
+}
+const { variante = 'kopf', class: className = '' } = Astro.props;
+---
+
+{variante === 'voll' ? (
+  <Image src={voll} alt="bAVhelden" height={240} class:list={['w-auto', className]} />
+) : (
+  <span class:list={['inline-flex flex-col items-center gap-0.5', className]}>
+    <Image src={figur} alt="" height={88} loading="eager" class="h-7 sm:h-[34px] w-auto shrink-0" />
+    <span class="font-body font-black text-[11px] sm:text-xs leading-none tracking-tight text-white">
+      <span class="text-[#16A3F0]">bAV</span>HELDEN
+    </span>
+  </span>
+)}

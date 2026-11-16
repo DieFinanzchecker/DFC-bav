@@ -17,15 +17,62 @@ import ReviewsCarousel from '../components/empfehlung/ReviewsCarousel.astro';
 import KontaktFormular from '../components/bav/KontaktFormular.astro';
 import FAQ from '../components/bav/FAQ.astro';
 import FinalCta from '../components/bav/FinalCta.astro';
+import faq from '../data/faq.json';
+import marke from '../data/marke.json';
+
+// Titel in den Suchergebnissen: Thema | Markenname. Solange der Markenname noch ein
+// Platzhalter ist (siehe src/data/marke.json), entfällt der Zusatz hinter dem Strich.
+const thema = 'Betriebliche Altersvorsorge (bAV) für Arbeitgeber';
+const seitentitel = marke.istPlatzhalter ? thema : `${thema} | ${marke.name}`;
+
+// Strukturierte Daten für Suchmaschinen (schema.org): diese Website als eigenes Angebot,
+// DieFinanzchecker als Betreiber mit der Hauptseite als Adresse (damit Google die Firma
+// weiterhin der Hauptdomain zuordnet) und die FAQ.
+const seite = new URL('/', Astro.site).href;
+const strukturierteDaten = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: marke.name,
+    url: seite,
+    description: 'Betriebliche Altersvorsorge (bAV) für Arbeitgeber: Beratung, Einrichtung und laufende Betreuung der Betriebsrente.',
+    publisher: { '@id': `${marke.dachmarkeUrl}/#organization` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'InsuranceAgency',
+    '@id': `${marke.dachmarkeUrl}/#organization`,
+    name: 'DieFinanzchecker GmbH',
+    url: marke.dachmarkeUrl,
+    logo: new URL('/images/dfc-logo.svg', Astro.site).href,
+    telephone: '+49 251 28454913',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Stockholmer Str. 15',
+      postalCode: '48163',
+      addressLocality: 'Münster',
+      addressCountry: 'DE',
+    },
+    knowsAbout: ['Betriebliche Altersvorsorge', 'Betriebsrente', 'Entgeltumwandlung', 'Arbeitgeberzuschuss', 'Direktversicherung', 'Versorgungsordnung'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.frage,
+      acceptedAnswer: { '@type': 'Answer', text: f.antwort },
+    })),
+  },
+];
 ---
 
 <BaseLayout
-  title="Betriebliche Altersvorsorge für Arbeitgeber | DieFinanzchecker GmbH"
-  description="Betriebliche Altersvorsorge für Ihr Unternehmen: Mitarbeitende binden, Rechtsansprüche erfüllen, Haftung minimieren. Mit Förderrechner für Arbeitgeber. Jetzt kostenloses Erstgespräch sichern."
-  image="/images/dfc-logo.svg"
+  title={seitentitel}
+  description="Betriebsrente für Ihr Unternehmen: Mitarbeiter binden, Arbeitgeberzuschuss rechtssicher umsetzen, Haftung minimieren. Mit bAV-Rechner für Arbeitgeber."
 >
-  <!-- TODO_DFC: Es existiert noch kein eigenes OG-Bild für DFC-bAV — bis dahin
-       dient das DFC-Logo als Platzhalter für Social-/Messenger-Vorschauen. -->
+  <!-- Vorschaubild für geteilte Links: public/images/og-bavhelden.png (Standard im BaseLayout) -->
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(strukturierteDaten)} />
   <Hero />
   <Kennzahlen />
   <PainPoints />

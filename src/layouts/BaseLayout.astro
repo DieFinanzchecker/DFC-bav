@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import StickyWhatsappCta from '../components/StickyWhatsappCta.astro';
 import marke from '../data/marke.json';
+import Logo from '../components/bav/Logo.astro';
 
 interface Props {
   title: string;
@@ -16,7 +17,7 @@ interface Props {
 const {
   title,
   description,
-  image = '/images/dfc-logo.svg',
+  image = '/images/og-bavhelden.png',
   ogTitle = title,
   ogDescription = description,
 } = Astro.props;
@@ -25,7 +26,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const calendly = marke.calendly;
 const navCtaText = 'Erstgespräch sichern';
 const navLinks = [
-  { href: '#rechner', text: 'Förderrechner' },
+  { href: '#rechner', text: 'bAV-Rechner' },
   { href: '#vorteile', text: 'Vorteile' },
   { href: '#haftung', text: 'Haftung' },
   { href: '#ablauf', text: 'Ablauf' },
@@ -38,7 +39,7 @@ const navLinks = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0F110C" />
+    <meta name="theme-color" content="#0C0E12" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -55,6 +56,8 @@ const navLinks = [
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
     <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="de_DE" />
     <meta property="og:site_name" content={`${marke.name} | DieFinanzchecker`} />
 
@@ -71,20 +74,20 @@ const navLinks = [
 
   <body class="noise-bg">
 
-    <!-- Schwebende Kopfzeile: dunkles Glas. Links der (Platzhalter-)Markenname aus
-         src/data/marke.json, daneben der Hinweis auf die Dachmarke DieFinanzchecker. -->
+    <!-- Schwebende Kopfzeile: dunkles Glas. Links das Logo der Marke
+         (src/components/bav/Logo.astro), daneben der Hinweis auf die Dachmarke DieFinanzchecker. -->
     <nav class="fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-6xl">
-      <div class="rounded-full border border-white/10 bg-[#0F110C]/75 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.45)] flex items-center justify-between gap-4 pl-5 pr-2 py-2 sm:pl-7 sm:pr-3 sm:py-2.5">
+      <div class="rounded-full border border-white/10 bg-[#0C0E12]/75 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.45)] flex items-center justify-between gap-2 sm:gap-4 pl-4 pr-2 py-2 sm:pl-7 sm:pr-3 sm:py-2.5">
         <a href="/" class="shrink-0 flex items-center gap-3 sm:gap-4" aria-label={`${marke.name} – ${marke.zusatz}`}>
-          <span class="font-body font-bold text-sm sm:text-base text-white tracking-tight leading-tight">{marke.name}</span>
-          <span class="hidden sm:flex items-center gap-2.5 border-l border-white/15 pl-4">
-            <span class="font-body text-[11px] text-white/50">von</span>
+          <Logo />
+          <span class="hidden md:flex flex-col items-start gap-[3px] border-l border-white/15 pl-4">
+            <span class="font-body text-[10px] leading-none tracking-wide text-white/50 whitespace-nowrap">eine Marke von</span>
             <img src="/images/dfc-logo.svg" alt="DieFinanzchecker" class="h-7 w-auto logo-hell" />
           </span>
         </a>
-        <div class="hidden lg:flex items-center gap-7">
+        <div class="hidden xl:flex items-center gap-6">
           {navLinks.map((l) => (
-            <a href={l.href} class="font-body text-sm text-white/65 hover:text-white transition-colors">{l.text}</a>
+            <a href={l.href} class="font-body text-sm text-white/65 hover:text-white transition-colors whitespace-nowrap">{l.text}</a>
           ))}
         </div>
         <a href="#kontakt" class="btn-primary !text-xs sm:!text-sm !px-4 !py-2.5 sm:!px-6 whitespace-nowrap">
@@ -103,7 +106,7 @@ const navLinks = [
       <div class="max-w-6xl mx-auto px-4 py-10">
         <div class="flex flex-col md:flex-row items-center justify-between gap-6">
           <div class="text-center md:text-left">
-            <p class="font-body text-lg font-bold tracking-tight text-white">{marke.name}</p>
+            <Logo variante="voll" class="h-28 mx-auto md:mx-0 mb-3" />
             <p class="font-body text-sm text-white/60 mt-1 mb-3">{marke.zusatz}</p>
             <p class="font-body text-sm text-white/50">DieFinanzchecker GmbH</p>
             <p class="font-body text-sm text-white/50 mt-1">Stockholmer Str. 15</p>
@@ -118,7 +121,7 @@ const navLinks = [
             rel="noopener noreferrer"
             class="font-body text-sm text-white/60 hover:text-white/90 underline underline-offset-2 transition-colors"
           >
-            Erstgespräch buchen →
+            Kostenloses Erstgespräch sichern →
           </a>
         </div>
 

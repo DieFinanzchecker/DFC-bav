@@ -39,8 +39,9 @@ html {
    =========================== */
 :root {
   /* Dunkles Grundthema (Redesign Nov. 2026): Farben 1:1 von diefinanzchecker.de,
-     Hintergrund = DFC-Schwarz #0F110C, Blau als Leuchtfarbe, Orange sparsam. */
-  --background: 80 17% 6%;
+     Hintergrund = neutrales Blauschwarz #0C0E12 (statt DFC-Schwarz #0F110C, dessen
+     Gelbgrün-Stich neben dem blauen Schimmer sichtbar wurde), Blau als Leuchtfarbe, Orange sparsam. */
+  --background: 220 20% 6%;
   --foreground: 0 0% 100%;
   --card: 80 9% 10%;
   --card-foreground: 0 0% 100%;
@@ -65,10 +66,10 @@ html {
   --gold-dark: 36 55% 32%;
   --teal: 232 100% 61%;
   --warn: 20 89% 55%;
-  --dark-bg: 80 17% 6%;
+  --dark-bg: 220 20% 6%;
 
   /* DFC Brand Colors (direkter Zugriff ohne HSL-Konvertierung) */
-  --color-dark: #0F110C;
+  --color-dark: #0C0E12;
   --color-accent-blue: #3D50FF;
   --color-accent-orange: #F26327;
   --color-accent-bright: #3DADFF;
@@ -492,7 +493,7 @@ section.relative .pill-label {
    Redesign Nov. 2026: dunkles Thema im Stil moderner SaaS-Seiten
    (Lichtflecken, Glas-Karten, leuchtende Buttons, nummerierte Abschnitte)
    =========================== */
-html { background-color: #0F110C; color-scheme: dark; }
+html { background-color: #0C0E12; color-scheme: dark; }
 
 /* Abschnitt mit weichem Lichtfleck im Hintergrund. Farbe/Position per Modifier. */
 .glow-section {
@@ -505,20 +506,21 @@ html { background-color: #0F110C; color-scheme: dark; }
   content: "";
   position: absolute;
   z-index: -1;
-  width: min(900px, 120vw);
+  width: min(1400px, 170vw);
   aspect-ratio: 1;
   left: 50%;
-  top: -260px;
+  top: -420px;
   transform: translateX(-50%);
-  background: radial-gradient(circle closest-side, rgba(61, 80, 255, 0.3), rgba(61, 80, 255, 0));
+  /* heller Kern (Hellblau), dann Markenblau, weich auslaufend */
+  background: radial-gradient(circle closest-side, rgba(61, 173, 255, 0.22), rgba(61, 80, 255, 0.34) 35%, rgba(61, 80, 255, 0.12) 70%, rgba(61, 80, 255, 0));
   pointer-events: none;
 }
-.glow-section.glow-left::before { left: 10%; top: 10%; }
-.glow-section.glow-right::before { left: 90%; top: 20%; }
+.glow-section.glow-left::before { left: 10%; top: 0; }
+.glow-section.glow-right::before { left: 90%; top: 5%; }
 .glow-section.glow-orange::before {
-  background: radial-gradient(circle closest-side, rgba(242, 99, 39, 0.16), rgba(242, 99, 39, 0));
+  background: radial-gradient(circle closest-side, rgba(242, 99, 39, 0.26), rgba(242, 99, 39, 0));
 }
-.glow-section.glow-bottom::before { top: auto; bottom: -420px; }
+.glow-section.glow-bottom::before { top: auto; bottom: -560px; }
 
 /* Glas-Karte */
 .glass-card {

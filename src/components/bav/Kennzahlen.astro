@@ -7,7 +7,7 @@ import { maxUmwandlung } from '../../lib/rechner';
 const quote = Math.round((werte.agSatzRvAv + werte.agSatzKvPv) * 100);
 const zahlen = [
   { wert: `${Math.round(werte.pflichtzuschuss * 100)} %`, text: 'gesetzlicher Pflichtzuschuss bei Entgeltumwandlung' },
-  { wert: `ca. ${quote} %`, text: 'sparen Sie als Arbeitgeber an Sozialabgaben auf den umgewandelten Betrag' },
+  { wert: `ca. ${quote} %`, text: 'Lohnnebenkosten sparen Sie als Arbeitgeber auf den umgewandelten Betrag' },
   { wert: `${maxUmwandlung} €`, text: `pro Monat steuer- und sozialabgabenfrei umwandelbar (${werte.stand})` },
   { wert: '0 €', text: 'kostet Sie unsere Erstanalyse Ihrer bestehenden bAV', orange: true },
 ];

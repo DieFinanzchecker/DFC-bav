@@ -1,8 +1,8 @@
 {
-  "_hinweis": "PLATZHALTER: Der endgültige Markenname steht noch nicht fest. Sobald er feststeht, nur hier ändern – Kopfzeile, Fußzeile, Seitentitel und 'Über uns' ziehen ihn automatisch.",
-  "name": "bAV für Arbeitgeber",
-  "istPlatzhalter": true,
-  "zusatz": "ein Angebot der DieFinanzchecker GmbH",
+  "_hinweis": "Markenname der Seite. Nur hier ändern – Kopfzeile, Fußzeile, Seitentitel und 'Über uns' ziehen ihn automatisch.",
+  "name": "bAVhelden",
+  "istPlatzhalter": false,
+  "zusatz": "eine Marke der DieFinanzchecker GmbH",
   "dachmarke": "DieFinanzchecker",
   "dachmarkeUrl": "https://www.diefinanzchecker.de",
   "calendly": "https://calendly.com/diefinanzchecker/kennenlerntermin"

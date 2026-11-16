@@ -1,5 +1,7 @@
 ---
-// "Ohne DieFinanzchecker" vs. "Mit DieFinanzchecker" — B2B/bAV-Variante des bewährten
+import marke from '../../data/marke.json';
+
+// "Ohne <Marke>" vs. "Mit <Marke>" (Name aus src/data/marke.json) — B2B/bAV-Variante des bewährten
 // Vergleichsmusters aus DFC-empfehlung. Bewusst NICHT die Original-Punkte übernommen
 // (die drehten sich um Produktauswahl/§84 vs. §93 HGB für Privatkunden) — hier auf die
 // konkrete Situation von Arbeitgebern bei der bAV zugeschnitten. Überschrift bewusst in
@@ -27,18 +29,18 @@ const mit = [
         Was sich für Ihr Unternehmen <span class="akzent">ändert</span>
       </h2>
       <p class="font-body text-fluid-body text-muted-foreground">
-        So sieht der Alltag mit betrieblicher Altersvorsorge aus — mit und ohne DieFinanzchecker an Ihrer Seite.
+        So sieht der Alltag mit betrieblicher Altersvorsorge aus — mit und ohne {marke.name} an Ihrer Seite.
       </p>
     </div>
 
     <div class="flex flex-col md:flex-row gap-4">
-      <!-- OHNE DieFinanzchecker -->
+      <!-- OHNE -->
       <div
         class="flex-1 rounded-[1.25rem] p-7 md:p-9 border flex flex-col gap-4 scroll-fade-in"
         style="background: rgba(242,99,39,0.07); border-color: rgba(242,99,39,0.28);"
       >
         <p class="b2b-heading text-lg text-white mb-0">
-          Ohne <span style="color: #F26327;">DieFinanzchecker</span>
+          Ohne <span style="color: #F26327;">{marke.name}</span>
         </p>
         <div class="flex flex-col gap-3">
           {ohne.map((t) => (
@@ -53,13 +55,13 @@ const mit = [
         </div>
       </div>
 
-      <!-- MIT DieFinanzchecker -->
+      <!-- MIT -->
       <div
         class="flex-1 rounded-[1.25rem] p-7 md:p-9 border flex flex-col gap-4 scroll-fade-in"
         style="background: linear-gradient(135deg, rgba(61,80,255,0.2), rgba(61,173,255,0.07)); border-color: rgba(61,173,255,0.35); box-shadow: 0 0 70px -30px rgba(61,120,255,0.9);"
       >
         <p class="b2b-heading text-lg text-white mb-0">
-          Mit <span style="color: #3DADFF;">DieFinanzchecker</span>
+          Mit <span style="color: #3DADFF;">{marke.name}</span>
         </p>
         <div class="flex flex-col gap-3">
           {mit.map((t) => (

@@ -5,7 +5,7 @@ import martinFoto from '../../assets/images/gruender/martin.avif';
 import jannisFoto from '../../assets/images/gruender/jannis.avif';
 
 const haken = [
-  'Mitarbeitende binden und neue Fachkräfte gewinnen',
+  'Mitarbeiterbindung stärken und neue Fachkräfte gewinnen',
   'Rechtsansprüche Ihrer Mitarbeitenden sauber erfüllen',
   'Haftungsrisiken für Ihr Unternehmen minimieren',
 ];
@@ -20,7 +20,7 @@ const haken = [
         Betriebliche Altersvorsorge, die sich für Ihr Unternehmen <span class="brand-gradient-text">rechnet.</span>
       </h1>
       <p class="font-body text-fluid-body text-white/70 max-w-xl mx-auto lg:mx-0 mb-7">
-        Wir versorgen Ihr gesamtes Unternehmen mit einer sauberen bAV: von der Versorgungsordnung über die Beratung Ihrer Mitarbeitenden bis zur laufenden Betreuung. <span class="text-white font-semibold">Ohne Mehraufwand</span> für Ihre HR-Abteilung.
+        Wir versorgen Ihr gesamtes Unternehmen mit einer sauberen Betriebsrente: von der Versorgungsordnung über die Beratung Ihrer Mitarbeitenden bis zur laufenden Betreuung. <span class="text-white font-semibold">Ohne Mehraufwand</span> für Ihre HR-Abteilung.
       </p>
 
       <ul class="flex flex-col gap-2.5 mb-9 max-w-xl mx-auto lg:mx-0 text-left">
@@ -39,7 +39,7 @@ const haken = [
           Kostenloses Erstgespräch sichern
           <Icon name="arrow-right" class="h-4 w-4" />
         </a>
-        <a href="#rechner" class="btn-ghost w-full sm:w-auto sm:whitespace-nowrap">Förderung berechnen</a>
+        <a href="#rechner" class="btn-ghost w-full sm:w-auto sm:whitespace-nowrap">Zuschuss berechnen</a>
       </div>
     </div>
 
@@ -49,11 +49,17 @@ const haken = [
         <div class="grid grid-cols-2">
           <img
             src={martinFoto.src}
+            width={martinFoto.width}
+            height={martinFoto.height}
+            decoding="async"
             alt="Martin Schmidt, Geschäftsführer DieFinanzchecker GmbH"
             class="w-full aspect-[3/4] object-cover object-top"
           />
           <img
             src={jannisFoto.src}
+            width={jannisFoto.width}
+            height={jannisFoto.height}
+            decoding="async"
             alt="Jannis Oberhaus, Geschäftsführer DieFinanzchecker GmbH"
             class="w-full aspect-[3/4] object-cover object-top"
           />
