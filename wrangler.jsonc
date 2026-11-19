@@ -1,0 +1,11 @@
+// Einstellungen für Cloudflare (Workers mit statischen Dateien).
+// Cloudflare baut die Seite mit `npm run build` und veröffentlicht danach mit
+// `npx wrangler deploy` den Inhalt des Ordners dist/.
+// "name" muss mit dem Projektnamen im Cloudflare-Dashboard übereinstimmen.
+{
+  "name": "bavhelden",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}
