@@ -15,10 +15,16 @@ import Icon from './Icon.astro';
 
     <div class="grid lg:grid-cols-[1.4fr_1fr] gap-8 items-start">
 
-      <!-- Kontaktformular: reine Frontend-Validierung, kein echter Versand-Handler -->
+      <!-- Kontaktformular: wird an /api/anfrage geschickt (worker/index.js) und von dort
+           per E-Mail weitergeleitet. Ohne JavaScript klappt es über eine normale Weiterleitung. -->
       <div class="scroll-fade-in glass-card p-6 md:p-8">
-        <!-- TODO_DFC: Versand-Backend (Make.com-Webhook oder E-Mail) noch offen, siehe Projektplan -->
-        <form class="grid sm:grid-cols-2 gap-5">
+        <form action="/api/anfrage" method="post" class="grid sm:grid-cols-2 gap-5" data-anfrage>
+          <!-- Spam-Falle: für Menschen unsichtbar, Bots füllen sie aus -->
+          <div class="hidden" aria-hidden="true">
+            <label for="webseite">Webseite</label>
+            <input id="webseite" name="webseite" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
           <div class="sm:col-span-1">
             <label for="firmenname" class="font-body text-sm font-semibold text-foreground mb-1.5 block">Firmenname *</label>
             <input
@@ -26,6 +32,8 @@ import Icon from './Icon.astro';
               name="firmenname"
               type="text"
               required
+              maxlength="200"
+              autocomplete="organization"
               class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
             />
           </div>
@@ -37,6 +45,8 @@ import Icon from './Icon.astro';
               name="ansprechpartner"
               type="text"
               required
+              maxlength="200"
+              autocomplete="name"
               class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
             />
           </div>
@@ -64,6 +74,8 @@ import Icon from './Icon.astro';
               name="email"
               type="email"
               required
+              maxlength="200"
+              autocomplete="email"
               class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
             />
           </div>
@@ -74,6 +86,8 @@ import Icon from './Icon.astro';
               id="telefon"
               name="telefon"
               type="tel"
+              maxlength="50"
+              autocomplete="tel"
               class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors"
             />
           </div>
@@ -84,6 +98,7 @@ import Icon from './Icon.astro';
               id="nachricht"
               name="nachricht"
               rows="4"
+              maxlength="5000"
               class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors resize-y"
             ></textarea>
           </div>
@@ -101,13 +116,15 @@ import Icon from './Icon.astro';
             </label>
           </div>
 
-          <div class="sm:col-span-2">
+          <div class="sm:col-span-2 flex flex-col sm:flex-row sm:items-center gap-4">
             <button
               type="submit"
-              class="btn-primary w-full sm:w-auto"
+              class="btn-primary w-full sm:w-auto shrink-0 whitespace-nowrap disabled:opacity-60 disabled:cursor-wait"
+              data-anfrage-knopf
             >
               Anfrage absenden
             </button>
+            <p class="font-body text-sm hidden" role="status" aria-live="polite" data-anfrage-meldung></p>
           </div>
         </form>
       </div>
@@ -134,3 +151,48 @@ import Icon from './Icon.astro';
     </div>
   </div>
 </section>
+
+<script>
+  // Formular ohne Seitenwechsel absenden und Ergebnis direkt unter dem Knopf anzeigen
+  const formular = document.querySelector<HTMLFormElement>('[data-anfrage]');
+  if (formular) {
+    const knopf = formular.querySelector<HTMLButtonElement>('[data-anfrage-knopf]')!;
+    const meldung = formular.querySelector<HTMLElement>('[data-anfrage-meldung]')!;
+    const zeige = (ok: boolean, text: string) => {
+      meldung.textContent = text;
+      meldung.classList.remove('hidden', 'text-[#3DADFF]', 'text-[#F26327]');
+      meldung.classList.add(ok ? 'text-[#3DADFF]' : 'text-[#F26327]');
+    };
+    const ERFOLG = 'Vielen Dank! Ihre Anfrage ist bei uns eingegangen, wir melden uns zeitnah.';
+    const FEHLER = 'Das hat leider nicht geklappt. Bitte versuchen Sie es erneut oder buchen Sie direkt einen Termin.';
+
+    // Rückmeldung nach dem Absenden ohne JavaScript (Weiterleitung mit ?anfrage=...)
+    const status = new URLSearchParams(location.search).get('anfrage');
+    if (status) zeige(status === 'gesendet', status === 'gesendet' ? ERFOLG : FEHLER);
+
+    formular.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      knopf.disabled = true;
+      knopf.textContent = 'Wird gesendet …';
+      try {
+        const r = await fetch(formular.action, {
+          method: 'POST',
+          body: new FormData(formular),
+          headers: { Accept: 'application/json' },
+        });
+        const daten = await r.json().catch(() => ({ ok: false }));
+        if (r.ok && daten.ok) {
+          formular.reset();
+          zeige(true, ERFOLG);
+        } else {
+          zeige(false, r.status === 400 ? 'Bitte prüfen Sie Ihre Angaben.' : FEHLER);
+        }
+      } catch {
+        zeige(false, FEHLER);
+      } finally {
+        knopf.disabled = false;
+        knopf.textContent = 'Anfrage absenden';
+      }
+    });
+  }
+</script>

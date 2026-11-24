@@ -1,11 +1,25 @@
-// Einstellungen für Cloudflare (Workers mit statischen Dateien).
+// Einstellungen für Cloudflare (Worker mit statischen Dateien).
 // Cloudflare baut die Seite mit `npm run build` und veröffentlicht danach mit
-// `npx wrangler deploy` den Inhalt des Ordners dist/.
+// `npx wrangler deploy` den Inhalt des Ordners dist/ plus den kleinen Worker in worker/.
 // "name" muss mit dem Projektnamen im Cloudflare-Dashboard übereinstimmen.
 {
   "name": "bavhelden",
+  "main": "./worker/index.js",
   "compatibility_date": "2026-11-01",
   "assets": {
-    "directory": "./dist"
-  }
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // Nur das Kontaktformular läuft über den Worker, alles andere kommt direkt aus dist/
+    "run_worker_first": ["/api/*"]
+  },
+  // E-Mail-Versand über Cloudflare Email Routing. Voraussetzung im Dashboard:
+  // Email Routing für bavhelden.de aktiviert und die Empfängeradresse bestätigt.
+  "send_email": [
+    { "name": "ANFRAGE_MAIL", "destination_address": "info@diefinanzchecker.de" }
+  ],
+  "vars": {
+    "ABSENDER": "formular@bavhelden.de",
+    "EMPFAENGER": "info@diefinanzchecker.de"
+  },
+  "observability": { "enabled": true }
 }
